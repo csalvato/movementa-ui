@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.png';
+import Button from 'react-toolbox/lib/button/Button';
+import Input from 'react-toolbox/lib/input/Input';
+import Layout from 'react-toolbox/lib/layout/Layout';
 
 class App extends Component {
   render() {
