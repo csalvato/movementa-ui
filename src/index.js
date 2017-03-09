@@ -4,6 +4,7 @@ import App from './App';
 import './index.css';
 import theme from './toolbox/theme.js'
 import './toolbox/theme.css';
+import 'flexboxgrid';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 
 ReactDOM.render(
