@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.png';
 import Button from 'react-toolbox/lib/button/Button';
 import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
@@ -11,7 +11,7 @@ const source = {
   'EN-en': 'USA'
 };
 
-class HomePage extends Component {
+class HomePage extends React.Component {
   state = {
       simple: ''
     }
