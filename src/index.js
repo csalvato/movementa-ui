@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './index.css';
 import theme from './toolbox/theme.js'
 import './toolbox/theme.css';
 import 'flexboxgrid';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
+import { browserHistory } from 'react-router';
+import Routes from './routes';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <Routes history={browserHistory} />
   </ThemeProvider>,
   document.getElementById('root')
 );
