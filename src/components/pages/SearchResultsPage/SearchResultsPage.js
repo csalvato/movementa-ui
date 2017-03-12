@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from 'react-toolbox/lib/layout/Layout';
 
 class SearchResultsPage extends React.Component {
   render() {
