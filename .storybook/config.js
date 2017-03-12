@@ -5,6 +5,8 @@ import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import theme from '../src/toolbox/theme.js';
 import '../src/toolbox/theme.css';
 import 'flexboxgrid';
+import 'roboto-fontface';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 const req = require.context('../src/components', true, /.stories.js$/)
 

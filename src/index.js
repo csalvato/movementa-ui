@@ -4,6 +4,8 @@ import './index.css';
 import theme from './toolbox/theme.js'
 import './toolbox/theme.css';
 import 'flexboxgrid';
+import 'roboto-fontface';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import { browserHistory } from 'react-router';
 import Routes from './routes';
