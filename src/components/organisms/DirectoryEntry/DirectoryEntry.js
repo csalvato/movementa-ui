@@ -19,10 +19,10 @@ class DirectoryEntry extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-6">
-            <Button raised primary>Call</Button>
+            <Button icon='phone' raised primary>Call</Button>
           </div>
           <div className="col-xs-6">
-            <Button raised>Map</Button>
+            <Button icon='near_me' raised>Map</Button>
           </div>
         </div>
         <hr/>
