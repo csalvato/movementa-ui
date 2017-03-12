@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.png';
 import Button from 'react-toolbox/lib/button/Button';
 import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 import Layout from 'react-toolbox/lib/layout/Layout';
+import { Logo } from 'components';
 
 const source = {
   'ES-es': 'Spain',
@@ -27,8 +27,7 @@ class HomePage extends React.Component {
           <div className="col-xs-offset-1
                           col-xs-10">
             <header className="box">
-              <img src={logo} className="movementa-logo" alt="logo" />
-              <span>MOVEMENTA</span>
+              <Logo />
             </header>
               <section className="box">
                   <h1>Learn Gymnastics</h1>
