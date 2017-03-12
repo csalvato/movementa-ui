@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
-import { Logo } from 'components';
+import { Logo, SearchForm } from 'components';
 
 class HomePage extends React.Component {
   render() {
@@ -12,12 +12,13 @@ class HomePage extends React.Component {
             <header className="box">
               <Logo />
             </header>
-              <section className="box">
-                  <h1>Learn Gymnastics</h1>
-                  <h2>Find a gym that allows adults to train.</h2>
-              </section>
+            <section className="box">
+                <h1>Learn Gymnastics</h1>
+                <h2>Find a gym that allows adults to train.</h2>
+            </section>
           </div>
         </div>
+        <SearchForm/>
       </Layout>
     );
   }
