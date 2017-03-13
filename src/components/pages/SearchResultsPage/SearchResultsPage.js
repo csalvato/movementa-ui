@@ -8,6 +8,11 @@ class SearchResultsPage extends React.Component {
       <Layout>
         <AppBarHeader/>
         <DirectoryEntry/>
+        <DirectoryEntry/>
+        <DirectoryEntry/>
+        <DirectoryEntry/>
+        <DirectoryEntry/>
+        <DirectoryEntry/>
       </Layout>
     );
   }
