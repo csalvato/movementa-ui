@@ -4,7 +4,9 @@ import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 
 import theme from '../src/toolbox/theme.js';
 import '../src/toolbox/theme.css';
+import '../src/index.css';
 import 'flexboxgrid';
+import 'flexboxgrid-helpers/dist/flexboxgrid-helpers.min.css'
 import 'roboto-fontface';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
