@@ -1,18 +1,23 @@
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
+import { HomePage,
+         SearchResultsPage } from 'components';
 
-import App from './components/App';
-import { HomePage, SearchResultsPage } from './components';
+// Must use the whole relative path specifically for
+// importing templates due to Babel persnicketiness w/router
+import AppTemplate from './components/templates/AppTemplate/AppTemplate'
+import HomeTemplate from './components/templates/HomeTemplate/HomeTemplate'
 
-function Routes(props) {
-  return(
-    <Router {...props}>
-      <Route path="/" component={App}>
-        <IndexRoute component={HomePage} />
-      </Route>
-      <Route path="/search" component={SearchResultsPage}/>
-    </Router>
-  )
-}
+const routes = (
+  <Route>
+    <Route path="/" component={HomeTemplate}>
+      <IndexRoute component={HomePage} />
+      {/* <Route path="*" component={NotFoundPage} /> */}
+    </Route>
+    <Route path="/search" component={AppTemplate}>
+      <IndexRoute component={SearchResultsPage} />
+    </Route>
+  </Route>
+)
 
-export default Routes;
+export default routes
