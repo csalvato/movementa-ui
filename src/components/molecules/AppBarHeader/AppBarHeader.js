@@ -7,7 +7,7 @@ class AppBarHeader extends React.Component {
     return (
       <div className="row">
         <div className="col-xs-12">
-          <div className="box">
+          <div className="box appbar-header">
             <AppBar>
               <Logo/>
               <SearchForm/>
