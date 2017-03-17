@@ -1,5 +1,4 @@
 import React from 'react';
-import { AppBarHeader } from 'components'
 
 class HomeTemplate extends React.Component {
   render() {
