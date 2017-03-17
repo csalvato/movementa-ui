@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
-import background from '../../../../assets/home_bg.png';
 
 class HomePage extends React.Component {
   render() {
