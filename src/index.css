@@ -121,3 +121,27 @@ body {
 .search-results-page {
   padding: 12px 24px;
 }
+
+.horizontal-search-form-autocomplete {
+  padding: 0;
+}
+
+.horizontal-search-form-autocomplete ._4bZUj { /* Autocomplete Input component */
+  padding-left: 10px;
+}
+
+.horizontal-search-form-autocomplete .lFVgC { /* Autocomplete Input parent component */
+  padding: 0px;
+  background: white;
+  border-radius: 3px;
+}
+
+.horizontal-search-form-autocomplete .bMyi_ { /* Autocomplete helper text */
+  top:12px;
+  padding-left: 10px;
+}
+
+._3-Nb6:not(._3rmye) {
+  color: #000;
+  margin-top: 0;
+}

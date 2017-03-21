@@ -4,11 +4,11 @@ import { SearchResultsPage } from 'components'
 import AppTemplate from '../../templates/AppTemplate/AppTemplate'
 
 storiesOf('SearchResultsPage', module)
-  .add('standalone', () => (
-    <SearchResultsPage />
-  ))
   .add('embedded', () => (
     <AppTemplate>
       <SearchResultsPage />
     </AppTemplate>
   ))
+  .add('standalone', () => (
+      <SearchResultsPage />
+    ))

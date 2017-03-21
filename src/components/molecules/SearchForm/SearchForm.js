@@ -1,5 +1,6 @@
 import React from 'react';
 import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
+import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
 
 class SearchForm extends React.Component {
@@ -47,17 +48,49 @@ class SearchForm extends React.Component {
     this.setState({ autocompleteItems: [] })
   }
 
-  render() {
+  renderVertical() {
     return (
-      <div className="searchForm">
-        <div className="row">
-          <div className="col-xs-offset-1
-                          col-xs-10">
+    <div className="searchForm">
+      <div className="row">
+        <div className="col-xs-offset-1
+                        col-xs-10">
+          <div className="box">
+            <Autocomplete
+               direction="down"
+               selectedPosition="above"
+               hint="Where do you want to train?"
+               multiple={false}
+               onQueryChange={this.handleQueryChange}
+               onChange={this.handleChange}
+               source={this.state.autocompleteItems}
+               value={this.state.value}
+               suggestionMatch={"anywhere"}
+             />
+           </div>
+        </div>
+      </div>
+      <div className="row center-xs">
+        <div className="col-xs-12">
+          <div className="box">
+            <Button raised primary>FIND A GYM</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  }
+
+  renderHorizontal() {
+    return (
+      <div className="searchForm box">
+        <div className="row end-xs">
+          <div className="col-xs-9">
             <div className="box">
               <Autocomplete
+                 className="horizontal-search-form-autocomplete"
                  direction="down"
                  selectedPosition="above"
-                 hint="Where do you want to train?"
+                 hint="Search gyms near you"
                  multiple={false}
                  onQueryChange={this.handleQueryChange}
                  onChange={this.handleChange}
@@ -67,16 +100,24 @@ class SearchForm extends React.Component {
                />
              </div>
           </div>
-        </div>
-        <div className="row center-xs">
-          <div className="col-xs-12">
-            <div className="box">
-              <Button raised primary>FIND A GYM</Button>
+          <div className="col-xs-1">
+            <div className="box horizontal-search-form__submit-button">
+              <IconButton raised inverse icon="search"/>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
+  }
+
+  render() {
+    var renderedForm;
+    if(this.props.horizontal === true) {
+      renderedForm = this.renderHorizontal();
+    } else {
+      renderedForm = this.renderVertical();
+    }
+    return renderedForm;
   }
 }
 
