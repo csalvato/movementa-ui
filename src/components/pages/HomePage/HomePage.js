@@ -13,7 +13,7 @@ class HomePage extends React.Component {
           <div className="logo-header row center-xs">
             <div className="col-xs-12">
               <header className="box">
-                <Logo />
+                <Logo withText/>
               </header>
             </div>
           </div>
