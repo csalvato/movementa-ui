@@ -46,7 +46,7 @@ class DirectoryEntry extends React.Component {
           </div>
         </div>
         <div className="row directory-entry__cta-buttons visible-xs">
-          <div className="col-xs-6 end-xs col-sm start-sm">
+          <div className="col-xs-6 end-xs col-sm start-md">
             <div className="box">
               <Button icon='phone' raised primary>Call</Button>
             </div>

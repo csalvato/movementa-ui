@@ -4,7 +4,6 @@ body {
 }
 
 .logo {
-  margin: 8px;
   white-space:nowrap;
   color: white;
 }
@@ -107,9 +106,22 @@ body {
   margin: 0px;
 }
 
+.appbar {
+  position:fixed;
+  width:100%;
+  z-index:999;
+}
+
+
+.headline-header {
+  background-color: #d1d7fa;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
 .headline-header__headline {
   font-size: 21px;
   margin: 0;
+  padding: 10px 18px;
 }
 
 @media only screen and (min-width: 48em) {
@@ -119,7 +131,18 @@ body {
 }
 
 .search-results-page {
-  padding: 12px 24px;
+  position: relative;
+  top: 56px;
+}
+
+@media only screen and (min-width: 48em) {
+  .search-results-page {
+    top: 64px;
+  }
+}
+
+.search-results-page__results {
+  padding: 12px 18px;
 }
 
 .horizontal-search-form-autocomplete {
@@ -139,6 +162,11 @@ body {
 .horizontal-search-form-autocomplete .bMyi_ { /* Autocomplete helper text */
   top:12px;
   padding-left: 10px;
+}
+
+.horizontal-search-form__submit-button {
+  position: relative;
+  top: 8px;
 }
 
 ._3-Nb6:not(._3rmye) {

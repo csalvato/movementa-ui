@@ -102,7 +102,7 @@ class SearchForm extends React.Component {
           </div>
           <div className="col-xs-1">
             <div className="box horizontal-search-form__submit-button">
-              <IconButton raised inverse icon="search"/>
+              <IconButton inverse icon="search"/>
             </div>
           </div>
         </div>
