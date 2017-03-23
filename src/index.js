@@ -12,13 +12,28 @@ import { createHistory } from 'history';
 import { Router, useRouterHistory } from 'react-router';
 
 import routes from 'routes';
+import ReactGA from 'react-ga';
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  ReactGA.initialize('UA-96092057-2'); //Dev tracking code
+} else {
+  ReactGA.initialize('UA-96092057-1'); //Prod tracking code
+}
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
 
 const root = document.getElementById('root')
 const history = useRouterHistory(createHistory)({ basename: process.env.PUBLIC_PATH })
 
 const renderApp = () => (
   <ThemeProvider theme={theme}>
-    <Router key={Math.random()} history={history} routes={routes} />
+    <Router key={Math.random()}
+            history={history}
+            routes={routes}
+            onUpdate={logPageView}/>
   </ThemeProvider>
 )
 
