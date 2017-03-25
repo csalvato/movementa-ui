@@ -7,6 +7,7 @@
     "npm": "3.10.10"
   },
   "dependencies": {
+    "airbnb-js-shims": "^1.1.1",
     "flexboxgrid": "^6.3.1",
     "flexboxgrid-helpers": "^1.1.1",
     "history": "^3.0.0",

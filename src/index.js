@@ -10,6 +10,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import { createHistory } from 'history';
 import { Router, useRouterHistory } from 'react-router';
+import 'airbnb-js-shims';
 
 import routes from 'routes';
 import ReactGA from 'react-ga';
