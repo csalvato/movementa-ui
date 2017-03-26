@@ -7,6 +7,7 @@
     "npm": "3.10.10"
   },
   "dependencies": {
+    "airbnb-js-shims": "^1.1.1",
     "flexboxgrid": "^6.3.1",
     "flexboxgrid-helpers": "^1.1.1",
     "history": "^3.0.0",
@@ -15,6 +16,7 @@
     "postcss-cssnext": "^2.9.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-ga": "^2.1.2",
     "react-redux": "^5.0.3",
     "react-router": "^3.0.2",
     "react-toolbox": "^2.0.0-beta.6",
@@ -30,12 +32,12 @@
     "react-storybook-decorator-background": "^1.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "NODE_PATH=./src react-scripts start",
+    "build": "NODE_PATH=./src react-scripts build",
+    "test": "NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "toolbox": "react-toolbox-themr",
-    "storybook": "start-storybook -p 9009 -s public -c .storybook",
-    "build-storybook": "build-storybook -s public"
+    "storybook": "NODE_PATH=./src start-storybook -p 9009 -s public -c .storybook",
+    "build-storybook": "NODE_PATH=./src build-storybook -s public"
   }
 }
