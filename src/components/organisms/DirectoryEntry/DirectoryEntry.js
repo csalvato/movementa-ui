@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { FeatureIcon } from 'components';
 import Button from 'react-toolbox/lib/button/Button';
 import FontIcon from 'react-toolbox/lib/font_icon/FontIcon';
+
+const propTypes = {
+  location: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    addressLine1: PropTypes.string.isRequired,
+    addressLine2: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    zip: PropTypes.string.isRequired,
+    phone: PropTypes.string,
+    email: PropTypes.string,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    hasAdultOpenGym: PropTypes.bool.isRequired,
+    hasAdultGymnasticsClasses: PropTypes.bool.isRequired
+  }).isRequired
+
+};
+
+const defaultProps = {
+
+};
 
 class DirectoryEntry extends React.Component {
   render() {
@@ -10,32 +33,34 @@ class DirectoryEntry extends React.Component {
           <div className="col-xs-6
                           directory-entry__location-contact-info">
             <h3 className="directory-entry__location-name">
-              NY Strong
+              { this.props.location.name }
             </h3>
             <p className="directory-entry__location-line">
-              300 Phillips Park Rd.
+              { this.props.location.addressLine1 }
             </p>
             <p className="directory-entry__location-line">
-              2nd Floor
+              { this.props.location.addressLine2 }
             </p>
             <p className="directory-entry__location-line">
-              Mamaroneck, NY 10543
+              { this.props.location.city }, { this.props.location.state } { this.props.location.zip }
             </p>
             <p className="directory-entry__location-line hidden-xs">
               <a href="#">
                 <FontIcon value='phone' className="directory-entry__icon"/>
-                (718)-252-3974
+                { this.props.location.phone }
               </a>
             </p>
           </div>
           <div className="col-xs-6 directory-entry__location-other-info">
             <p className="directory-entry__other-line">
-              <FontIcon value='check_circle' className="directory-entry__icon directory-entry__icon--pass"/>
-              Adult Open Gym
+              <FeatureIcon hasFeature={ this.props.location.hasAdultOpenGym }>
+                Adult Open Gym
+              </FeatureIcon>
             </p>
             <p className="directory-entry__other-line">
-              <FontIcon value='cancel' className="directory-entry__icon directory-entry__icon--fail"/>
-              Adult Classes
+              <FeatureIcon hasFeature={ this.props.location.hasAdultGymnasticsClasses } >
+                Adult Classes
+              </FeatureIcon>
             </p>
             <p className="directory-entry__other-line hidden-xs">
               <a href="#">
@@ -62,5 +87,8 @@ class DirectoryEntry extends React.Component {
     );
   }
 }
+
+DirectoryEntry.propTypes = propTypes;
+DirectoryEntry.defaultProps = defaultProps;
 
 export default DirectoryEntry;

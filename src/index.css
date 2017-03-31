@@ -91,18 +91,18 @@ body {
   margin: 0px;
 }
 
-.directory-entry__icon{
+.feature-icon{
   font-size: 16px !important;
   position: relative;
   top: 2px;
   margin-right:2px;
 }
 
-.directory-entry__icon--fail{
+.feature-icon--fail{
   color: red;
 }
 
-.directory-entry__icon--pass{
+.feature-icon--pass{
   color: green;
 }
 
