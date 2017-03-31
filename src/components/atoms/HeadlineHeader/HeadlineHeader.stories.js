@@ -6,3 +6,6 @@ storiesOf('HeadlineHeader', module)
   .add('default', () => (
     <HeadlineHeader />
   ))
+  .add('with child', () => (
+    <HeadlineHeader>Some Child Text</HeadlineHeader>
+  ))
