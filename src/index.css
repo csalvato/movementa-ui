@@ -1,3 +1,12 @@
+/*
+Colors
+  #303f9f
+  #3d5989
+  #bbc0df
+  #f1d2c8
+  #eb3261
+*/
+
 body {
   margin: 0;
   padding: 0;
@@ -114,7 +123,7 @@ body {
 
 
 .headline-header {
-  background-color: #d1d7fa;
+  background-color: #bbc0df;
   font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
@@ -132,7 +141,7 @@ body {
 
 .search-results-page {
   position: relative;
-  top: 56px;
+  top: 64px;
 }
 
 @media only screen and (min-width: 48em) {
