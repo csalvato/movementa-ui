@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import logo from './logo.png';
 
 const propTypes = {
-  withText: PropTypes.boolean
+  withText: PropTypes.bool
 };
 
 const defaultProps = {
