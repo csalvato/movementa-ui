@@ -26,6 +26,21 @@ const defaultProps = {
 };
 
 class DirectoryEntry extends React.Component {
+  get googleMapsUrl() {
+    const location = this.props.location
+    var full_address = `${location.addressLine1} ${location.addressLine2} ${location.city} ${location.state} ${location.zip}`
+    full_address = full_address.replace(/ /g, "+");
+    return `http://maps.google.com/?q=${full_address}`
+  }
+
+  get phoneString() {
+    return this.props.location.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+  }
+
+  get phoneUrl() {
+    return `tel:${this.props.location.phone}`
+  }
+
   render() {
     return (
       <div className="directory-entry">
@@ -45,9 +60,9 @@ class DirectoryEntry extends React.Component {
               { this.props.location.city }, { this.props.location.state } { this.props.location.zip }
             </p>
             <p className="directory-entry__location-line hidden-xs">
-              <a href="#">
+              <a href={this.phoneUrl}>
                 <FontIcon value='phone' className="directory-entry__icon"/>
-                { this.props.location.phone }
+                { this.phoneString }
               </a>
             </p>
           </div>
@@ -63,7 +78,7 @@ class DirectoryEntry extends React.Component {
               </FeatureIcon>
             </p>
             <p className="directory-entry__other-line hidden-xs">
-              <a href="#">
+              <a href={ this.googleMapsUrl } target='_blank'>
                 <FontIcon value='near_me' className="directory-entry__icon"/>
                 See on Google Maps
               </a>
@@ -73,12 +88,26 @@ class DirectoryEntry extends React.Component {
         <div className="row directory-entry__cta-buttons visible-xs">
           <div className="col-xs-6 end-xs col-sm start-md">
             <div className="box">
-              <Button icon='phone' raised primary>Call</Button>
+              <Button
+                raised
+                primary
+                icon='phone'
+                href={this.phoneUrl}
+              >
+                Call
+              </Button>
             </div>
           </div>
           <div className="col-xs-6 start-xs">
             <div className="box">
-              <Button icon='near_me' raised>Map</Button>
+              <Button
+                raised
+                icon='near_me'
+                href={ this.googleMapsUrl }
+                target='_blank'
+              >
+                Map
+              </Button>
             </div>
           </div>
         </div>
