@@ -9,24 +9,19 @@ const defaultProps = {
   withText: false
 };
 
-class Logo extends React.Component {
-  renderText() {
-    return (<span className="logo__text--large">MOVEMENTA</span>);
-  }
+function Logo({ withText }) {
+  const logoText = withText ? <span className="logo__text--large">MOVEMENTA</span> : null;
 
-  render() {
-    const logoText = this.props.withText ? this.renderText() : null;
-    return (
-      <div className="logo box">
-        <img
-          src={logo}
-          className="logo__image--large box"
-          alt="logo"
-          role="presentation" />
-        {logoText}
-      </div>
-    );
-  }
+  return (
+    <div className="logo box">
+      <img
+        src={logo}
+        className="logo__image--large box"
+        alt="logo"
+        role="presentation" />
+      {logoText}
+    </div>
+  );
 }
 
 Logo.propTypes = propTypes;
