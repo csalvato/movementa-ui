@@ -12,7 +12,6 @@ const defaultProps = {
 };
 
 function FeatureIcon({ hasFeature, children }) {
-
   const getIconName = () => {
      return hasFeature ? "check_circle" : "cancel";
   }
