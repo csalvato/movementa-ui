@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import { Logo, SearchForm } from 'components'
 
-function AppBarHeader({ }) {
+function AppBarHeader() {
   return (
     <div className="appbar-header">
       <div className="row">

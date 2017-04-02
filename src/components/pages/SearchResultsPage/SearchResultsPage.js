@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import { DirectoryEntry, HeadlineHeader } from 'components';
 
-function SearchResultsPage({ }) {
+function SearchResultsPage() {
   return (
     <div className="search-results-page">
       <div className="row">

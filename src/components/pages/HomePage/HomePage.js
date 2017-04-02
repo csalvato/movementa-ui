@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
 
-function HomePage({ }) {
+function HomePage() {
   return (
     <div className="homepage">
       <div className="blurred-background">
