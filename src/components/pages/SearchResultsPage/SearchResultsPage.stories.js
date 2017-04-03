@@ -2,11 +2,6 @@ import React from 'react'
 import { storiesOf } from '@kadira/storybook'
 import { SearchResultsPage, DirectoryEntry } from 'components'
 import AppTemplate from '../../templates/AppTemplate/AppTemplate'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import reducer from 'reducers'
-
-const store = createStore(reducer)
 
 
 const results = [<DirectoryEntry
@@ -72,14 +67,10 @@ const results = [<DirectoryEntry
 
 storiesOf('SearchResultsPage', module)
   .add('embedded', () => (
-    <Provider store={store}>
-      <AppTemplate>
-        <SearchResultsPage results={results}/>
-      </AppTemplate>
-    </Provider>
+    <AppTemplate>
+      <SearchResultsPage results={results}/>
+    </AppTemplate>
   ))
   .add('standalone', () => (
-      <Provider store={store}>
-        <SearchResultsPage results={results}/>
-      </Provider>
+    <SearchResultsPage results={results}/>
     ))
