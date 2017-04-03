@@ -3,7 +3,7 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import { DirectoryEntry, HeadlineHeader } from 'components';
 
 const propTypes = {
-  results: PropTypes.arrayOf(<DirectoryEntry/>).isRequired
+  results: PropTypes.arrayOf(DirectoryEntry).isRequired
 };
 
 const defaultProps = {

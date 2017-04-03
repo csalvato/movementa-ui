@@ -2,8 +2,15 @@ import React from 'react'
 import { storiesOf } from '@kadira/storybook'
 import { SearchResultsPage, DirectoryEntry } from 'components'
 import AppTemplate from '../../templates/AppTemplate/AppTemplate'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from 'reducers'
+
+const store = createStore(reducer)
+
 
 const results = [<DirectoryEntry
+                  key={1}
                   location={ { name: "NY Strong",
                                addressLine1: "300 Phillips Park Rd.",
                                addressLine2: "Suite 205",
@@ -18,6 +25,7 @@ const results = [<DirectoryEntry
                                hasAdultGymnasticsClasses: false
                              } }/>,
                 <DirectoryEntry
+                 key={2}
                  location={ { name: "NY Strong",
                               addressLine1: "300 Phillips Park Rd.",
                               addressLine2: "Suite 205",
@@ -32,6 +40,7 @@ const results = [<DirectoryEntry
                               hasAdultGymnasticsClasses: false
                             } }/>,
                 <DirectoryEntry
+                  key={3}
                   location={ { name: "NY Strong",
                                addressLine1: "300 Phillips Park Rd.",
                                addressLine2: "Suite 205",
@@ -46,6 +55,7 @@ const results = [<DirectoryEntry
                                hasAdultGymnasticsClasses: false
                              } }/>,
                 <DirectoryEntry
+                 key={4}
                  location={ { name: "NY Strong",
                               addressLine1: "300 Phillips Park Rd.",
                               addressLine2: "Suite 205",
@@ -62,10 +72,14 @@ const results = [<DirectoryEntry
 
 storiesOf('SearchResultsPage', module)
   .add('embedded', () => (
-    <AppTemplate>
-      <SearchResultsPage results={results}/>
-    </AppTemplate>
+    <Provider store={store}>
+      <AppTemplate>
+        <SearchResultsPage results={results}/>
+      </AppTemplate>
+    </Provider>
   ))
   .add('standalone', () => (
-      <SearchResultsPage results={results}/>
+      <Provider store={store}>
+        <SearchResultsPage results={results}/>
+      </Provider>
     ))
