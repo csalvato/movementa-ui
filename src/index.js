@@ -11,6 +11,9 @@ import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import { createHistory } from 'history';
 import { Router, useRouterHistory } from 'react-router';
 import 'airbnb-js-shims';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 
 import routes from 'routes';
 import ReactGA from 'react-ga';
@@ -29,13 +32,31 @@ function logPageView() {
 const root = document.getElementById('root')
 const history = useRouterHistory(createHistory)({ basename: process.env.PUBLIC_PATH })
 
+export default function configureStore() {
+  const store = createStore(reducer)
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('./reducers', () => {
+      const nextRootReducer = require('./reducers/index');
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
+  return store;
+}
+
+const store = configureStore();
+
 const renderApp = () => (
-  <ThemeProvider theme={theme}>
-    <Router key={Math.random()}
-            history={history}
-            routes={routes}
-            onUpdate={logPageView}/>
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <Router key={Math.random()}
+              history={history}
+              routes={routes}
+              onUpdate={logPageView}/>
+    </ThemeProvider>
+  </Provider>
 )
 
 render(renderApp(), root)
