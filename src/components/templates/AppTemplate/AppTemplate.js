@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { AppBarHeader } from 'components'
 
-class AppTemplate extends React.Component {
-  render() {
-    return (
-      <div className="app">
-        <AppBarHeader/>
-        {this.props.children}
-      </div>
-    );
-  }
+const propTypes = {
+  children: PropTypes.element
+};
+
+const defaultProps = {
+};
+
+function AppTemplate({children}) {
+  return (
+    <div className="app">
+      <AppBarHeader/>
+      {children}
+    </div>
+  );
 }
+
+AppTemplate.propTypes = propTypes;
+AppTemplate.defaultProps = defaultProps;
 
 export default AppTemplate;
