@@ -2,10 +2,16 @@ import React, { PropTypes }from 'react';
 import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
+import { connect } from 'react-redux'
+import { updateSearchQuery,
+         updateAutocompleteItems } from 'actions'
 
 const propTypes = {
   query: PropTypes.string.isRequired,
-  autocompleteItems: PropTypes.array.isRequired
+  autocompleteItems: PropTypes.array.isRequired,
+  // Requires dispatch since this is a stateful component
+  //  and will never not have state or dispatch.
+  dispatch: React.PropTypes.func.isRequired
 };
 
 const defaultProps = {
@@ -14,49 +20,37 @@ const defaultProps = {
 };
 
 class SearchForm extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //
-  //   this.state = { value: '',
-  //                  autocompleteItems: [] }
-  //   this.autocompleteCallback = this.autocompleteCallback.bind(this)
-  //   this.handleQueryChange = this.handleQueryChange.bind(this)
-  //   this.handleChange = this.handleChange.bind(this)
-  // }
+  constructor(props) {
+    super(props)
+    this.autocompleteCallback = this.autocompleteCallback.bind(this)
+    this.handleQueryChange = this.handleQueryChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-  // handleChange(value) {
-  //   this.setState({value: value});
-  // }
+  componentDidMount() {
+     this.autocompleteService = new window.google.maps.places.AutocompleteService()
+  }
 
-  // componentDidMount() {
-  //   this.autocompleteService = new window.google.maps.places.AutocompleteService()
-  //   this.autocompleteOK = window.google.maps.places.PlacesServiceStatus.OK
-  // }
+  handleChange(value) {
+    this.props.dispatch(updateSearchQuery(value));
+  }
 
-  // autocompleteCallback(predictions, status) {
-  //   if (status !== this.autocompleteOK) {
-  //     console.log("Error with autocomplete predictions");
-  //     if (this.props.clearItemsOnError) { this.clearAutocomplete() }
-  //     return
-  //   }
-  //
-  //   this.setState({
-  //     autocompleteItems: predictions.map((p, idx) => (p.description))
-  //   })
-  // }
+  autocompleteCallback(predictions, status) {
+    const okStatus = window.google.maps.places.PlacesServiceStatus.OK
+    if (status !== okStatus) {
+      console.log("Error with autocomplete predictions");
+      this.props.dispatch(updateAutocompleteItems([]))
+      return
+    }
 
-  // handleQueryChange(query) {
-  //   console.log("The query:", query);
-  //   this.setState({value: query})
-  //   console.log("The value:", this.state.value);
-  //   this.autocompleteService.getPlacePredictions({ ...this.props.options, input: query },
-  //                                                this.autocompleteCallback)
-  //   console.log("The value:", this.state.value);
-  // }
+    let predictionsArray = predictions.map((p, idx) => (p.description))
+    this.props.dispatch(updateAutocompleteItems(predictionsArray))
+  }
 
-  // clearAutocomplete() {
-  //   this.setState({ autocompleteItems: [] })
-  // }
+  handleQueryChange(query) {
+    this.props.dispatch(updateSearchQuery(query));
+    this.autocompleteService.getPlacePredictions({ input: query }, this.autocompleteCallback)
+  }
 
   renderVertical() {
     return (
@@ -131,7 +125,16 @@ class SearchForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    query: state.query,
+    autocompleteItems: state.autocompleteItems
+  }
+}
+
 SearchForm.propTypes = propTypes;
 SearchForm.defaultProps = defaultProps;
+
+SearchForm = connect(mapStateToProps)(SearchForm)
 
 export default SearchForm;
