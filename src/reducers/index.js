@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import search from './search'
+import query from './query'
+import autocompleteItems from './autocompleteItems'
 
 const searchApp = combineReducers({
-  search
+  query,
+  autocompleteItems
 })
 
 export default searchApp;
