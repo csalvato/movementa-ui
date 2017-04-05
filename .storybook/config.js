@@ -9,12 +9,17 @@ import 'flexboxgrid';
 import 'flexboxgrid-helpers/dist/flexboxgrid-helpers.min.css'
 import 'roboto-fontface';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from 'reducers'
+import logger from 'redux-logger'
 
 export default function configureStore() {
-  const store = createStore(reducer)
+  const store = createStore(
+      reducer,
+      //Uses logger from `redux-logger`
+      applyMiddleware(logger)
+    )
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
