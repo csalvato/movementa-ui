@@ -3,8 +3,7 @@ import FontIcon from 'react-toolbox/lib/font_icon/FontIcon';
 
 const propTypes = {
   hasFeature: PropTypes.bool.isRequired,
-  children: PropTypes.string.isRequired,
-  iconName: PropTypes.oneOf(['News', 'Photos'])
+  children: PropTypes.string.isRequired
 };
 
 const defaultProps = {
