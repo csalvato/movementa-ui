@@ -7,7 +7,7 @@ const propTypes = {
   location: PropTypes.shape({
     name: PropTypes.string.isRequired,
     addressLine1: PropTypes.string.isRequired,
-    addressLine2: PropTypes.string.isRequired,
+    addressLine2: PropTypes.string,
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
     zip: PropTypes.string.isRequired,

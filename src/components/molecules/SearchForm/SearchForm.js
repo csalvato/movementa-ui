@@ -4,7 +4,8 @@ import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
 import { connect } from 'react-redux'
 import { updateSearchQuery,
-         updateAutocompleteItems } from 'actions'
+         updateAutocompleteItems,
+         fetchSearchResults } from 'actions'
 
 const propTypes = {
   query: PropTypes.string.isRequired,
@@ -38,7 +39,6 @@ class SearchForm extends React.Component {
   autocompleteCallback(predictions, status) {
     const okStatus = window.google.maps.places.PlacesServiceStatus.OK
     if (status !== okStatus) {
-      console.log("Error with autocomplete predictions");
       this.props.dispatch(updateAutocompleteItems([]))
       return
     }
@@ -49,7 +49,10 @@ class SearchForm extends React.Component {
 
   handleQueryChange(query) {
     this.props.dispatch(updateSearchQuery(query));
-    this.autocompleteService.getPlacePredictions({ input: query }, this.autocompleteCallback)
+    //Tells Google to only return geocoding results,
+    // not business names
+    const autoCompleteOptions = { types: ['geocode'] }
+    this.autocompleteService.getPlacePredictions({ ...autoCompleteOptions , input: query }, this.autocompleteCallback)
   }
 
   renderVertical() {
@@ -106,7 +109,12 @@ class SearchForm extends React.Component {
           </div>
           <div className="col-xs-1">
             <div className="box horizontal-search-form__submit-button">
-              <IconButton inverse icon="search"/>
+              <IconButton
+                inverse
+                icon="search"
+                onClick={() => {this.props.dispatch(fetchSearchResults(this.props.query))}}
+                // href={`/search?q=${encodeURIComponent(this.props.query)}`}
+              />
             </div>
           </div>
         </div>

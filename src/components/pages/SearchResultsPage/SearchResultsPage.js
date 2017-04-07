@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
 
 const propTypes = {
-  results: PropTypes.arrayOf(DirectoryEntry).isRequired,
+  results: PropTypes.array.isRequired,
   isFetchingSearchResults: PropTypes.bool.isRequired,
   // Requires dispatch since this is a stateful component
   //  and will never not have state or dispatch.
@@ -24,7 +24,25 @@ class SearchResultsPage extends React.Component {
               <ProgressBar type='circular' mode='indeterminate' />
              </div>
     } else {
-       return this.props.results
+      const entries = this.props.results.map(result => {
+        return <DirectoryEntry
+          key={result.id}
+          location={ { name: result.name,
+                       addressLine1: result.addressLine1,
+                       addressLine2: result.addressLine2,
+                       city: result.city,
+                       state: result.state,
+                       zip: result.zip,
+                       phone: result.phone,
+                       email: result.email,
+                       lat: result.lat,
+                       lng: result.lng,
+                       hasAdultOpenGym: result.hasAdultOpenGym,
+                       hasAdultGymnasticsClasses: result.hasAdultGymnasticsClasses
+                     } }
+        />
+      })
+      return entries
     }
   }
 

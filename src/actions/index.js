@@ -1,7 +1,7 @@
 export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY'
 export const UPDATE_AUTOCOMPLETE_ITEMS = 'UPDATE_AUTOCOMPLETE_ITEMS'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
-export const REQUEST_POSTS = 'REQUEST_POSTS'
+export const REQUEST_SEARCH_RESULTS = 'REQUEST_SEARCH_RESULTS'
 
 export const updateSearchQuery = (query) => ({
   type: UPDATE_SEARCH_QUERY,
@@ -13,11 +13,19 @@ export const updateAutocompleteItems = (autocompleteItems, json) => ({
 })
 
 export function fetchSearchResults(query) {
+  let headers = new Headers();
+  headers.append("X-Api-Key", "FzM9QjNHMjzk4YIBsrYGhQtt");
+  const options = { headers: headers };
+  const request = new Request(`http://localhost:5000/v1/entries?q=${encodeURIComponent(query)}`, options);
+
   return dispatch => {
     dispatch(requestPosts(query))
-    return fetch(`movement-api/${query}.json`)
+    return fetch(request)
       .then(response => response.json())
-      .then(json => dispatch(updateSearchResults(query, json)))
+      .then(json => {
+        json = json.map((result) => (convertKeysToSnakeCase(result)))
+        dispatch(updateSearchResults(query, json))
+      })
   }
 }
 
@@ -25,13 +33,25 @@ function updateSearchResults(query, json) {
   return {
     type: UPDATE_SEARCH_RESULTS,
     query,
-    searchResults: json.data.children.map(child => child.data)
+    results: json
   }
 }
 
 function requestPosts(query) {
   return {
-    type: REQUEST_POSTS,
+    type: REQUEST_SEARCH_RESULTS,
     query
   }
+}
+
+function convertKeysToSnakeCase(json) {
+  //Convert json snake_case keys to camelCase
+  let newJson = {}
+  for (var key in json) {
+    if (json.hasOwnProperty(key)) {
+      let newKey = key.replace(/(_\w)/g, (string) => {return string[1].toUpperCase();});
+      newJson[newKey] = json[key]
+    }
+  }
+  return newJson;
 }
