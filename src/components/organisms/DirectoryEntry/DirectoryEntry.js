@@ -7,7 +7,7 @@ const propTypes = {
   location: PropTypes.shape({
     name: PropTypes.string.isRequired,
     addressLine1: PropTypes.string.isRequired,
-    addressLine2: PropTypes.string.isRequired,
+    addressLine2: PropTypes.string,
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
     zip: PropTypes.string.isRequired,
@@ -60,22 +60,22 @@ function DirectoryEntry({ location }) {
           </p>
         </div>
         <div className="col-xs-6 directory-entry__location-other-info">
-          <p className="directory-entry__other-line">
+          <div className="directory-entry__other-line">
             <FeatureIcon hasFeature={ location.hasAdultOpenGym }>
               Adult Open Gym
             </FeatureIcon>
-          </p>
-          <p className="directory-entry__other-line">
+          </div>
+          <div className="directory-entry__other-line">
             <FeatureIcon hasFeature={ location.hasAdultGymnasticsClasses } >
               Adult Classes
             </FeatureIcon>
-          </p>
-          <p className="directory-entry__other-line hidden-xs">
+          </div>
+          <div className="directory-entry__other-line hidden-xs">
             <a href={ googleMapsUrl } target='_blank'>
               <FontIcon value='near_me' className="directory-entry__icon"/>
               See on Google Maps
             </a>
-          </p>
+          </div>
         </div>
       </div>
       <div className="row directory-entry__cta-buttons visible-xs">

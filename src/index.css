@@ -154,6 +154,11 @@ body {
   padding: 12px 18px;
 }
 
+.search-results-page__spinner {
+  margin: auto;
+  width: 1%;
+}
+
 .horizontal-search-form-autocomplete {
   padding: 0;
 }

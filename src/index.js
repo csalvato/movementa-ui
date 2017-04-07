@@ -11,6 +11,8 @@ import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import { createHistory } from 'history';
 import { Router, useRouterHistory } from 'react-router';
 import 'airbnb-js-shims';
+import { Provider } from 'react-redux'
+import { storeWithEmptyState } from 'configureStore'
 
 import routes from 'routes';
 import ReactGA from 'react-ga';
@@ -29,13 +31,17 @@ function logPageView() {
 const root = document.getElementById('root')
 const history = useRouterHistory(createHistory)({ basename: process.env.PUBLIC_PATH })
 
+const store = storeWithEmptyState;
+
 const renderApp = () => (
-  <ThemeProvider theme={theme}>
-    <Router key={Math.random()}
-            history={history}
-            routes={routes}
-            onUpdate={logPageView}/>
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <Router key={Math.random()}
+              history={history}
+              routes={routes}
+              onUpdate={logPageView}/>
+    </ThemeProvider>
+  </Provider>
 )
 
 render(renderApp(), root)

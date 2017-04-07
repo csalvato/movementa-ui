@@ -1,51 +1,58 @@
-import React from 'react';
+import React, { PropTypes }from 'react';
 import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
+import { connect } from 'react-redux'
+import { updateSearchQuery,
+         updateAutocompleteItems,
+         fetchSearchResults } from 'actions'
+
+const propTypes = {
+  query: PropTypes.string.isRequired,
+  autocompleteItems: PropTypes.array.isRequired,
+  // Requires dispatch since this is a stateful component
+  //  and will never not have state or dispatch.
+  dispatch: React.PropTypes.func.isRequired
+};
+
+const defaultProps = {
+  query: '',
+  autocompleteItems: []
+};
 
 class SearchForm extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = { value: '',
-                   autocompleteItems: [] }
     this.autocompleteCallback = this.autocompleteCallback.bind(this)
     this.handleQueryChange = this.handleQueryChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(value) {
-    this.setState({value: value});
+  componentDidMount() {
+     this.autocompleteService = new window.google.maps.places.AutocompleteService()
   }
 
-  componentDidMount() {
-    this.autocompleteService = new window.google.maps.places.AutocompleteService()
-    this.autocompleteOK = window.google.maps.places.PlacesServiceStatus.OK
+  handleChange(value) {
+    this.props.dispatch(updateSearchQuery(value));
   }
 
   autocompleteCallback(predictions, status) {
-    if (status !== this.autocompleteOK) {
-      console.log("Error with autocomplete predictions");
-      if (this.props.clearItemsOnError) { this.clearAutocomplete() }
+    const okStatus = window.google.maps.places.PlacesServiceStatus.OK
+    if (status !== okStatus) {
+      this.props.dispatch(updateAutocompleteItems([]))
       return
     }
 
-    this.setState({
-      autocompleteItems: predictions.map((p, idx) => (p.description))
-    })
+    let predictionsArray = predictions.map((p, idx) => (p.description))
+    this.props.dispatch(updateAutocompleteItems(predictionsArray))
   }
 
   handleQueryChange(query) {
-    console.log("The query:", query);
-    this.setState({value: query})
-    console.log("The value:", this.state.value);
-    this.autocompleteService.getPlacePredictions({ ...this.props.options, input: query },
-                                                 this.autocompleteCallback)
-    console.log("The value:", this.state.value);
-  }
-
-  clearAutocomplete() {
-    this.setState({ autocompleteItems: [] })
+    this.props.dispatch(updateSearchQuery(query));
+    //Tells Google to only return geocoding results,
+    // not business names
+    const autoCompleteOptions = { types: ['geocode'] }
+    this.autocompleteService.getPlacePredictions({ ...autoCompleteOptions , input: query }, this.autocompleteCallback)
   }
 
   renderVertical() {
@@ -62,8 +69,8 @@ class SearchForm extends React.Component {
                multiple={false}
                onQueryChange={this.handleQueryChange}
                onChange={this.handleChange}
-               source={this.state.autocompleteItems}
-               value={this.state.value}
+               source={this.props.autocompleteItems}
+               value={this.props.query}
                suggestionMatch={"anywhere"}
              />
            </div>
@@ -94,15 +101,20 @@ class SearchForm extends React.Component {
                  multiple={false}
                  onQueryChange={this.handleQueryChange}
                  onChange={this.handleChange}
-                 source={this.state.autocompleteItems}
-                 value={this.state.value}
+                 source={this.props.autocompleteItems}
+                 value={this.props.query}
                  suggestionMatch={"anywhere"}
                />
              </div>
           </div>
           <div className="col-xs-1">
             <div className="box horizontal-search-form__submit-button">
-              <IconButton inverse icon="search"/>
+              <IconButton
+                inverse
+                icon="search"
+                onClick={() => {this.props.dispatch(fetchSearchResults(this.props.query))}}
+                // href={`/search?q=${encodeURIComponent(this.props.query)}`}
+              />
             </div>
           </div>
         </div>
@@ -120,5 +132,17 @@ class SearchForm extends React.Component {
     return renderedForm;
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    query: state.query,
+    autocompleteItems: state.autocompleteItems
+  }
+}
+
+SearchForm.propTypes = propTypes;
+SearchForm.defaultProps = defaultProps;
+
+SearchForm = connect(mapStateToProps)(SearchForm)
 
 export default SearchForm;

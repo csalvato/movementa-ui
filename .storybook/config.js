@@ -9,6 +9,11 @@ import 'flexboxgrid';
 import 'flexboxgrid-helpers/dist/flexboxgrid-helpers.min.css'
 import 'roboto-fontface';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import { applyMiddleware, createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from 'reducers'
+import thunkMiddleware from 'redux-thunk'
+import logger from 'redux-logger'
 
 const req = require.context('../src/components', true, /.stories.js$/)
 
@@ -17,7 +22,9 @@ function loadStories() {
 }
 
 addDecorator(story => (
-  <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  <ThemeProvider theme={theme}>
+    {story()}
+  </ThemeProvider>
 ))
 
 configure(loadStories, module);

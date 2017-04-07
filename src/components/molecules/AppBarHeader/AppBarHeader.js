@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import { Logo, SearchForm } from 'components'
 
-function AppBarHeader() {
+const propTypes = {
+  query: PropTypes.string.isRequired,
+  autocompleteItems: PropTypes.array.isRequired
+};
+
+const defaultProps = {
+  query: '',
+  autocompleteItems: []
+};
+
+
+function AppBarHeader({query, autocompleteItems}) {
   return (
     <div className="appbar-header">
       <div className="row">
@@ -16,7 +27,10 @@ function AppBarHeader() {
                 <Logo withText/>
               </div>
               <div className="col-xs-11 col-sm-9">
-                <SearchForm horizontal/>
+                <SearchForm
+                  horizontal
+                  query={query}
+                  autocompleteItems={autocompleteItems}/>
               </div>
             </AppBar>
           </div>
@@ -25,5 +39,8 @@ function AppBarHeader() {
     </div>
   );
 }
+
+AppBarHeader.propTypes = propTypes;
+AppBarHeader.defaultProps = defaultProps;
 
 export default AppBarHeader;

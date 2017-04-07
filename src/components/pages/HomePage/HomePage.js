@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
+import { connect } from 'react-redux'
 
 function HomePage() {
   return (
@@ -37,4 +38,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default connect()(HomePage);
