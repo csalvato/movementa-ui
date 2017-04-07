@@ -13,7 +13,7 @@ storiesOf('DirectoryEntry', module)
                        city: "Mamaroneck",
                        state: "NY",
                        zip: "10543",
-                       phone: "718-252-3974",
+                       phone: "7182523974",
                        email: "csalvato@gmail.com",
                        lat: -78.2490104891,
                        lng: -73.2490104891,

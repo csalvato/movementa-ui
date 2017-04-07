@@ -10,26 +10,24 @@ const defaultProps = {
   hasFeature: false
 };
 
-class FeatureIcon extends React.Component {
-   getIconName() {
-     return this.props.hasFeature ? "check_circle" : "cancel";
+function FeatureIcon({ hasFeature, children }) {
+  const getIconName = () => {
+     return hasFeature ? "check_circle" : "cancel";
   }
 
-  getIconState() {
-    return this.props.hasFeature ? "pass" : "fail";
+  const getIconState = () => {
+    return hasFeature ? "pass" : "fail";
   }
 
-  render() {
-    return (
-      <div>
-        <FontIcon
-          value={ this.getIconName() }
-          className={ "feature-icon feature-icon--" + this.getIconState() }
-        />
-        { this.props.children }
-      </div>
-    )
-  }
+  return (
+    <div>
+      <FontIcon
+        value={ getIconName() }
+        className={ "feature-icon feature-icon--" + getIconState() }
+      />
+      { children }
+    </div>
+  )
 }
 
 FeatureIcon.propTypes = propTypes;
