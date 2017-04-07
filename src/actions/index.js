@@ -1,42 +1,37 @@
+export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY'
+export const UPDATE_AUTOCOMPLETE_ITEMS = 'UPDATE_AUTOCOMPLETE_ITEMS'
+export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
+export const REQUEST_POSTS = 'REQUEST_POSTS'
+
 export const updateSearchQuery = (query) => ({
-  type: 'UPDATE_SEARCH_QUERY',
+  type: UPDATE_SEARCH_QUERY,
   query
 })
 export const updateAutocompleteItems = (autocompleteItems, json) => ({
-  type: 'UPDATE_AUTOCOMPLETE_ITEMS',
+  type: UPDATE_AUTOCOMPLETE_ITEMS,
   autocompleteItems
 })
 
-export const updateSearchResults = (searchResults, json) => ({
-  type: 'UPDATE_SEARCH_RESULTS',
-  searchResults
-})
+export function fetchSearchResults(query) {
+  return dispatch => {
+    dispatch(requestPosts(query))
+    return fetch(`movement-api/${query}.json`)
+      .then(response => response.json())
+      .then(json => dispatch(updateSearchResults(query, json)))
+  }
+}
 
-// export const invalidateSearchResults = (autocompleteItems) => ({
-//   type: 'INVALIDATE_AUTOCOMPLETE_ITEMS',
-//   autocompleteItems
-// })
-//
-// export const requestSearchResults = (searchResults) => ({
-//   type: 'REQUEST_SEARCH_RESULTS',
-//   searchResults
-// })
-//
-// export const receiveSearchResults = (searchResults, json) => ({
-//   type: 'RECEIVE_SEARCH_RESULTS',
-//   searchResults,
-//   posts: json.data.children.map(child => child.data),
-//   receivedAt: Date.now()
-// })
+function updateSearchResults(query, json) {
+  return {
+    type: UPDATE_SEARCH_RESULTS,
+    query,
+    searchResults: json.data.children.map(child => child.data)
+  }
+}
 
-
-// Example State Tree
-// {
-//   query: "11234",
-//   autocompleteItems: [ "11234 Brooklyn, NY", "Hello 11234 World"],
-//   searchResults: {
-//     isFetching: false,
-//     didInvalidate: false,
-//     results: [{location: {...}},{location: {...}}]
-//   }
-// }
+function requestPosts(query) {
+  return {
+    type: REQUEST_POSTS,
+    query
+  }
+}
