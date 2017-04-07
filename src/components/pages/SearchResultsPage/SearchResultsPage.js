@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
 
 const propTypes = {
@@ -23,23 +24,7 @@ class SearchResultsPage extends React.Component {
               <ProgressBar type='circular' mode='indeterminate' />
              </div>
     } else {
-       return this.props.results.map(entry =>
-                    <DirectoryEntry
-                      location={ { name: entry.name,
-                                   addressLine1: entry.addressLine1,
-                                   addressLine2: entry.addressLine2,
-                                   city: entry.city,
-                                   state: entry.state,
-                                   zip: entry.zip,
-                                   phone: entry.phone,
-                                   email: entry.email,
-                                   lat: entry.lat,
-                                   lng: entry.lng,
-                                   hasAdultOpenGym: entry.hasAdultOpenGym,
-                                   hasAdultGymnasticsClasses: entry.hasAdultGymnasticsClasses
-                                 } }
-                    />
-                  )
+       return this.props.results
     }
   }
 
@@ -67,7 +52,16 @@ class SearchResultsPage extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isFetchingSearchResults: state.searchResults.isFetching,
+    results: state.searchResults.results
+  }
+}
+
 SearchResultsPage.propTypes = propTypes
 SearchResultsPage.defaultProps = defaultProps
+
+SearchResultsPage = connect(mapStateToProps)(SearchResultsPage)
 
 export default SearchResultsPage;

@@ -1,9 +1,8 @@
-// const initialState = { isFetching: false,
-//                        didInvalidate: false,
-//                        results: []
-//                      }
+const initialState = { isFetching: false,
+                       results: []
+                     }
 
-const searchResults = (state = [], action) => {
+const searchResults = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_SEARCH_RESULTS':
       return action.searchResults
@@ -12,4 +11,4 @@ const searchResults = (state = [], action) => {
   }
 }
 
-export default autocompleteItems;
+export default searchResults;

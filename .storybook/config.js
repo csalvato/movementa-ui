@@ -11,28 +11,9 @@ import 'roboto-fontface';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from 'reducers'
+import rootReducer from 'reducers'
+import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
-
-export default function configureStore() {
-  const store = createStore(
-      reducer,
-      //Uses logger from `redux-logger`
-      applyMiddleware(logger)
-    )
-
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../src/reducers', () => {
-      const nextRootReducer = require('../src/reducers/index');
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-
-  return store;
-}
-
-const store = configureStore();
 
 const req = require.context('../src/components', true, /.stories.js$/)
 
@@ -41,11 +22,9 @@ function loadStories() {
 }
 
 addDecorator(story => (
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      {story()}
-    </ThemeProvider>
-  </Provider>
+  <ThemeProvider theme={theme}>
+    {story()}
+  </ThemeProvider>
 ))
 
 configure(loadStories, module);
