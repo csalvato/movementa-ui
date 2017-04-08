@@ -3,6 +3,7 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
+import { fetchSearchResults } from 'actions'
 
 const propTypes = {
   results: PropTypes.array.isRequired,
@@ -18,6 +19,11 @@ const defaultProps = {
 };
 
 class SearchResultsPage extends React.Component {
+  componentDidMount() {
+    const query = this.props.location.query.q
+    this.props.dispatch(fetchSearchResults(query))
+  }
+
   renderSearchResults(){
     if(this.props.isFetchingSearchResults) {
       return <div className="search-results-page__spinner">
