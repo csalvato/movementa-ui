@@ -26,21 +26,21 @@ class SearchResultsPage extends React.Component {
     } else {
       const entries = this.props.results.map(result => {
         return <DirectoryEntry
-          key={result.id}
-          location={ { name: result.name,
-                       addressLine1: result.addressLine1,
-                       addressLine2: result.addressLine2,
-                       city: result.city,
-                       state: result.state,
-                       zip: result.zip,
-                       phone: result.phone,
-                       email: result.email,
-                       lat: result.lat,
-                       lng: result.lng,
-                       hasAdultOpenGym: result.hasAdultOpenGym,
-                       hasAdultGymnasticsClasses: result.hasAdultGymnasticsClasses
-                     } }
-        />
+                  key={result.id}
+                  location={ { name: result.name,
+                               addressLine1: result.addressLine1,
+                               addressLine2: result.addressLine2,
+                               city: result.city,
+                               state: result.state,
+                               zip: result.zip,
+                               phone: result.phone,
+                               email: result.email,
+                               lat: result.lat,
+                               lng: result.lng,
+                               hasAdultOpenGym: result.hasAdultOpenGym,
+                               hasAdultGymnasticsClasses: result.hasAdultGymnasticsClasses
+                             } }
+                />
       })
       return entries
     }
