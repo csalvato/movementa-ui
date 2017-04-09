@@ -5,10 +5,6 @@ const propTypes = {
   children: PropTypes.string.isRequired
 };
 
-const defaultProps = {
-  children: 'Adult Gymnastics',
-};
-
 function HeadlineHeader({ children }) {
   return (
     <div className="row">
@@ -24,6 +20,5 @@ function HeadlineHeader({ children }) {
 }
 
 HeadlineHeader.propTypes = propTypes;
-HeadlineHeader.defaultProps = defaultProps;
 
 export default HeadlineHeader;
