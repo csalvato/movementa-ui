@@ -24,29 +24,3 @@ xit("renders a search form", function(){
   const wrapper = mount(<Provider store={store}><AppBarHeader /></Provider>);
   expect(wrapper.find(SearchForm)).toBePresent()
 });
-
-xit("renders with empty string for query by default", function(){
-  // To test this, we need to mount the component.
-  // That requires fixing the problem described in the spec for
-  // `renders a search form`
-  const wrapper = mount(<AppBarHeader />);
-  expect(wrapper).toHaveProp('query', '');
-});
-
-xit("renders with an empty array for autocompleteItems by default", function(){
-  // To test this, we need to mount the component.
-  // That requires fixing the problem described in the spec for
-  // `renders a search form`
-  const wrapper = mount(<AppBarHeader />);
-  expect(wrapper).toHaveProp('autocompleteItems', []);
-});
-
-xit("provides the query to the search form", function(){
-  // Need to figure out how to implement this. Seems like it's not worthwhile
-  // until I figure out the mounting issue.
-});
-
-xit("provides the autocompleteItems to the search form", function(){
-  // Need to figure out how to implement this. Seems like it's not worthwhile
-  // until I figure out the mounting issue.
-});

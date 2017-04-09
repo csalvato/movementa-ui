@@ -3,18 +3,7 @@ import PropTypes from 'prop-types';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import { Logo, SearchForm } from 'components'
 
-const propTypes = {
-  query: PropTypes.string.isRequired,
-  autocompleteItems: PropTypes.array.isRequired
-};
-
-const defaultProps = {
-  query: '',
-  autocompleteItems: []
-};
-
-
-function AppBarHeader({query, autocompleteItems}) {
+function AppBarHeader() {
   return (
     <div className="appbar-header">
       <div className="row">
@@ -28,10 +17,7 @@ function AppBarHeader({query, autocompleteItems}) {
                 <Logo withText/>
               </div>
               <div className="col-xs-11 col-sm-9">
-                <SearchForm
-                  horizontal
-                  query={query}
-                  autocompleteItems={autocompleteItems}/>
+                <SearchForm horizontal/>
               </div>
             </AppBar>
           </div>
@@ -40,8 +26,5 @@ function AppBarHeader({query, autocompleteItems}) {
     </div>
   );
 }
-
-AppBarHeader.propTypes = propTypes;
-AppBarHeader.defaultProps = defaultProps;
 
 export default AppBarHeader;
