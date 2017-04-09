@@ -8,10 +8,10 @@ it('renders', () => {
 
 it('renders without text by default', () => {
   const wrapper = shallow(<Logo/>)
-  expect(wrapper.contains('MOVEMENTA')).toEqual(false)
+  expect(wrapper).not.toIncludeText('MOVEMENTA')
 })
 
 it('renders', () => {
   const wrapper = shallow(<Logo withText/>)
-  expect(wrapper.contains('MOVEMENTA')).toEqual(true)
+  expect(wrapper).toIncludeText('MOVEMENTA')
 })
