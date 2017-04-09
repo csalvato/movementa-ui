@@ -16,17 +16,17 @@ it('throws an error when rendered without children', () => {
 
 it('renders with child text', () => {
   const wrapper = shallow(<FeatureIcon>test</FeatureIcon>)
-  expect(wrapper.contains("test")).toEqual(true)
+  expect(wrapper).toIncludeText("test")
 })
 
 it('renders with FontIcon with value of check_circle when hasFeature is set', () => {
   const wrapper = mount(<FeatureIcon hasFeature>test</FeatureIcon>)
-  expect(wrapper.find(FontIcon).prop('value')).toEqual('check_circle')
+  expect(wrapper.find(FontIcon)).toHaveProp('value', 'check_circle')
 })
 
 it('renders with FontIcon with value of cancel when hasFeature is not set', () => {
   const wrapper = mount(<FeatureIcon>test</FeatureIcon>)
-  expect(wrapper.find(FontIcon).prop('value')).toEqual('cancel')
+  expect(wrapper.find(FontIcon)).toHaveProp('value', 'cancel')
 })
 
 it('renders with FontIcon class feature-icon--fail when hasFeature is set', () => {
