@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import HeadlineHeader from '.'
+import HeadlineHeader from './HeadlineHeader'
 
-it('renders', () => {
-  shallow(<HeadlineHeader />)
+it('renders without crashing', () => {
+   shallow(<HeadlineHeader />)
 })

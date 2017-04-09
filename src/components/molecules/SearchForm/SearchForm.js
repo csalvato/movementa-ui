@@ -12,7 +12,7 @@ const propTypes = {
   autocompleteItems: PropTypes.array.isRequired,
   // Requires dispatch since this is a stateful component
   //  and will never not have state or dispatch.
-  dispatch: React.PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 };
 
 const defaultProps = {
@@ -20,7 +20,7 @@ const defaultProps = {
   autocompleteItems: []
 };
 
-class SearchForm extends React.Component {
+export class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.autocompleteCallback = this.autocompleteCallback.bind(this)
@@ -143,6 +143,4 @@ const mapStateToProps = (state) => {
 SearchForm.propTypes = propTypes;
 SearchForm.defaultProps = defaultProps;
 
-SearchForm = connect(mapStateToProps)(SearchForm)
-
-export default SearchForm;
+export default connect(mapStateToProps)(SearchForm);

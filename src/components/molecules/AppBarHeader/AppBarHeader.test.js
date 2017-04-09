@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import AppBarHeader from '.'
+import AppBarHeader from './AppBarHeader'
 
 it('renders', () => {
   shallow(<AppBarHeader />)

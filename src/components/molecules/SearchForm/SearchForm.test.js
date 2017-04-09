@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import SearchForm from '.'
+import ConnectedSearchForm, { SearchForm } from './SearchForm'
 
 it('renders', () => {
   shallow(<SearchForm />)

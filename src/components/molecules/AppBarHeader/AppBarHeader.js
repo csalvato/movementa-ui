@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import { Logo, SearchForm } from 'components'
 

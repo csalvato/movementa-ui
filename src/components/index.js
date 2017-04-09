@@ -1,11 +1,22 @@
-// Require all files in the `components` directory that
-// are not a .test.js or .stories.js file.
-const req = require.context('.', true, /\.\/[^/]+\/[^/]+\/((?!test|stories).)*\.js$/)
+import FeatureIcon from './atoms/FeatureIcon/FeatureIcon'
+import HeadlineHeader from './atoms/HeadlineHeader/HeadlineHeader'
+import Logo from './atoms/Logo/Logo'
+import AppBarHeader from './molecules/AppBarHeader/AppBarHeader'
+import SearchForm from './molecules/SearchForm/SearchForm'
+import DirectoryEntry from './organisms/DirectoryEntry/DirectoryEntry'
+import HomePage from './pages/HomePage/HomePage'
+import SearchResultsPage from './pages/SearchResultsPage/SearchResultsPage'
+import AppTemplate from './templates/AppTemplate/AppTemplate'
+import HomeTemplate from './templates/HomeTemplate/HomeTemplate'
 
-req.keys().forEach((key) => {
-  // Export component names based on the directory in which they live.
-  // For example, "HomePage" component in `./pages/HomePage/index.js` or
-  // `./pages/HomePage/HomePage.js` would be importable as `HomePage`
-  const componentName = key.replace(/^.+\/([^/]+)\/([^.]+)\.js/, '$1')
-  module.exports[componentName] = req(key).default
-})
+export { FeatureIcon,
+         HeadlineHeader,
+         Logo,
+         AppBarHeader,
+         SearchForm,
+         DirectoryEntry,
+         HomePage,
+         SearchResultsPage,
+         AppTemplate,
+         HomeTemplate
+       }

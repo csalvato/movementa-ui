@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import FeatureIcon from '.'
+import { FeatureIcon } from './FeatureIcon'
 
 it('renders', () => {
-  shallow(<FeatureIcon />)
+  shallow(<FeatureIcon>test</FeatureIcon>)
 })

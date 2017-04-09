@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
@@ -18,7 +19,7 @@ const defaultProps = {
   isFetchingSearchResults: false
 };
 
-class SearchResultsPage extends React.Component {
+export class SearchResultsPage extends React.Component {
   componentDidMount() {
     const query = this.props.location.query.q
     this.props.dispatch(fetchSearchResults(query))
@@ -86,6 +87,4 @@ const mapStateToProps = (state) => {
 SearchResultsPage.propTypes = propTypes
 SearchResultsPage.defaultProps = defaultProps
 
-SearchResultsPage = connect(mapStateToProps)(SearchResultsPage)
-
-export default SearchResultsPage;
+export default connect(mapStateToProps)(SearchResultsPage);
