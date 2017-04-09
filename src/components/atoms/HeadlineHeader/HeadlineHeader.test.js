@@ -15,5 +15,5 @@ it('throws an error when rendered without children', () => {
 
 it('renders with child text', () => {
   const wrapper = shallow(<HeadlineHeader>test</HeadlineHeader>)
-  expect(wrapper.contains("test")).toEqual(true)
+  expect(wrapper).toIncludeText("test")
 })
