@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch'
+
 export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY'
 export const UPDATE_AUTOCOMPLETE_ITEMS = 'UPDATE_AUTOCOMPLETE_ITEMS'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
