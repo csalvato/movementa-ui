@@ -31,7 +31,7 @@ export class SearchResultsPage extends React.Component {
       return <div className="search-results-page__spinner">
               <ProgressBar type='circular' mode='indeterminate' />
              </div>
-    } else {
+    } else if(this.props.results.length > 0) {
       const entries = this.props.results.map(result => {
         return <DirectoryEntry
                   key={result.id}
@@ -51,6 +51,10 @@ export class SearchResultsPage extends React.Component {
                 />
       })
       return entries
+    } else {
+      return <div className="no-results">
+              There are no results in this area. :(
+             </div>
     }
   }
 
