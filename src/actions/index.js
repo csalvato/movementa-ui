@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch'
+
 export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY'
 export const UPDATE_AUTOCOMPLETE_ITEMS = 'UPDATE_AUTOCOMPLETE_ITEMS'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
@@ -19,7 +21,7 @@ export function fetchSearchResults(query) {
   const request = new Request(`http://localhost:5000/v1/entries?q=${encodeURIComponent(query)}`, options);
 
   return dispatch => {
-    dispatch(requestPosts(query))
+    dispatch(requestSearchResults(query))
     return fetch(request)
       .then(response => response.json())
       .then(json => {
@@ -37,7 +39,7 @@ function updateSearchResults(query, json) {
   }
 }
 
-function requestPosts(query) {
+function requestSearchResults(query) {
   return {
     type: REQUEST_SEARCH_RESULTS,
     query

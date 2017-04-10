@@ -62,21 +62,37 @@ const results = [{ id: 1,
                  hasAdultGymnasticsClasses: false
              }]
 
-const fetchingState = {searchResults: { results: [],
-                                  isFetching: true
-                                }
-                            }
+const fetchingState = { query: "foobar",
+                        searchResults: { results: [],
+                                         isFetching: true
+                                       }
+                      }
 const storeWithFetching = configureStore(fetchingState);
 
-const stateWithResults = {searchResults: { results: results,
-                                     isFetching: false
-                                   }
-                   }
+const stateWithResults = {  query: "foobar",
+                            searchResults: { results: results,
+                                             isFetching: false
+                                           }
+                         }
 const storeWithResults = configureStore(stateWithResults);
+
+const stateWithoutResults = {  query: "foobar",
+                              searchResults: { results: [],
+                                               isFetching: false
+                                             }
+                            }
+const storeWithoutResults = configureStore(stateWithoutResults);
 
 storiesOf('SearchResultsPage', module)
   .add('embedded', () => (
     <Provider store={storeWithResults}>
+      <AppTemplate>
+        <SearchResultsPage/>
+      </AppTemplate>
+    </Provider>
+  ))
+  .add('without results', () => (
+    <Provider store={storeWithoutResults}>
       <AppTemplate>
         <SearchResultsPage/>
       </AppTemplate>

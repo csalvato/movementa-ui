@@ -1,11 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const propTypes = {
   children: PropTypes.string.isRequired
-};
-
-const defaultProps = {
-  children: 'Adult Gymnastics',
 };
 
 function HeadlineHeader({ children }) {
@@ -23,6 +20,5 @@ function HeadlineHeader({ children }) {
 }
 
 HeadlineHeader.propTypes = propTypes;
-HeadlineHeader.defaultProps = defaultProps;
 
 export default HeadlineHeader;

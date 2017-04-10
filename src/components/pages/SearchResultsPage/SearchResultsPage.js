@@ -1,15 +1,18 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
+import { fetchSearchResults } from 'actions'
 
 const propTypes = {
   results: PropTypes.array.isRequired,
   isFetchingSearchResults: PropTypes.bool.isRequired,
   // Requires dispatch since this is a stateful component
   //  and will never not have state or dispatch.
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  query: PropTypes.string
 };
 
 const defaultProps = {
@@ -17,32 +20,44 @@ const defaultProps = {
   isFetchingSearchResults: false
 };
 
-class SearchResultsPage extends React.Component {
+export class SearchResultsPage extends React.Component {
+  componentDidMount() {
+    if (this.props.location !== undefined) {
+      console.log(this.props.location)
+      const query = this.props.location.query.q
+      this.props.dispatch(fetchSearchResults(query))
+    }
+  }
+
   renderSearchResults(){
     if(this.props.isFetchingSearchResults) {
       return <div className="search-results-page__spinner">
               <ProgressBar type='circular' mode='indeterminate' />
              </div>
-    } else {
+    } else if(this.props.results.length > 0) {
       const entries = this.props.results.map(result => {
         return <DirectoryEntry
-          key={result.id}
-          location={ { name: result.name,
-                       addressLine1: result.addressLine1,
-                       addressLine2: result.addressLine2,
-                       city: result.city,
-                       state: result.state,
-                       zip: result.zip,
-                       phone: result.phone,
-                       email: result.email,
-                       lat: result.lat,
-                       lng: result.lng,
-                       hasAdultOpenGym: result.hasAdultOpenGym,
-                       hasAdultGymnasticsClasses: result.hasAdultGymnasticsClasses
-                     } }
-        />
+                  key={result.id}
+                  location={ { name: result.name,
+                               addressLine1: result.addressLine1,
+                               addressLine2: result.addressLine2,
+                               city: result.city,
+                               state: result.state,
+                               zip: result.zip,
+                               phone: result.phone,
+                               email: result.email,
+                               lat: result.lat,
+                               lng: result.lng,
+                               hasAdultOpenGym: result.hasAdultOpenGym,
+                               hasAdultGymnasticsClasses: result.hasAdultGymnasticsClasses
+                             } }
+                />
       })
       return entries
+    } else {
+      return <div className="no-results">
+              There are no results in this area. :(
+             </div>
     }
   }
 
@@ -52,7 +67,7 @@ class SearchResultsPage extends React.Component {
         <div className="row">
           <div className="col-xs-12 headline-header">
             <div className="box">
-              <HeadlineHeader/>
+              <HeadlineHeader>Adult Gymnastics near {this.props.query}</HeadlineHeader>
             </div>
           </div>
         </div>
@@ -73,13 +88,12 @@ class SearchResultsPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isFetchingSearchResults: state.searchResults.isFetching,
-    results: state.searchResults.results
+    results: state.searchResults.results,
+    query: state.query
   }
 }
 
 SearchResultsPage.propTypes = propTypes
 SearchResultsPage.defaultProps = defaultProps
 
-SearchResultsPage = connect(mapStateToProps)(SearchResultsPage)
-
-export default SearchResultsPage;
+export default connect(mapStateToProps)(SearchResultsPage);

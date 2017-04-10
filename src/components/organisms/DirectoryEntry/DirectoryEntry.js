@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FeatureIcon } from 'components';
 import Button from 'react-toolbox/lib/button/Button';
 import FontIcon from 'react-toolbox/lib/font_icon/FontIcon';

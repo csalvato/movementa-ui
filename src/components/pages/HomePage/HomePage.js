@@ -3,7 +3,7 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
 import { connect } from 'react-redux'
 
-function HomePage() {
+export function HomePage() {
   return (
     <div className="homepage">
       <div className="blurred-background">
