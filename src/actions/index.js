@@ -21,7 +21,7 @@ export function fetchSearchResults(query) {
   const request = new Request(`http://localhost:5000/v1/entries?q=${encodeURIComponent(query)}`, options);
 
   return dispatch => {
-    dispatch(requestPosts(query))
+    dispatch(requestSearchResults(query))
     return fetch(request)
       .then(response => response.json())
       .then(json => {
@@ -39,7 +39,7 @@ function updateSearchResults(query, json) {
   }
 }
 
-function requestPosts(query) {
+function requestSearchResults(query) {
   return {
     type: REQUEST_SEARCH_RESULTS,
     query

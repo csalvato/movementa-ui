@@ -4,6 +4,8 @@ const query = (state = "", action) => {
       return action.query
     case 'UPDATE_SEARCH_RESULTS':
       return action.query
+    case 'REQUEST_SEARCH_RESULTS':
+      return action.query
     default:
       return state
   }
