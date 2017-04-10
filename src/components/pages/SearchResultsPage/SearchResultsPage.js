@@ -11,7 +11,8 @@ const propTypes = {
   isFetchingSearchResults: PropTypes.bool.isRequired,
   // Requires dispatch since this is a stateful component
   //  and will never not have state or dispatch.
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  query: PropTypes.string
 };
 
 const defaultProps = {
@@ -59,7 +60,7 @@ export class SearchResultsPage extends React.Component {
         <div className="row">
           <div className="col-xs-12 headline-header">
             <div className="box">
-              <HeadlineHeader/>
+              <HeadlineHeader>Adult Gymnastics near {this.props.query}</HeadlineHeader>
             </div>
           </div>
         </div>
@@ -80,7 +81,8 @@ export class SearchResultsPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isFetchingSearchResults: state.searchResults.isFetching,
-    results: state.searchResults.results
+    results: state.searchResults.results,
+    query: state.query
   }
 }
 
