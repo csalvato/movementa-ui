@@ -22,8 +22,11 @@ const defaultProps = {
 
 export class SearchResultsPage extends React.Component {
   componentDidMount() {
-    const query = this.props.location.query.q
-    this.props.dispatch(fetchSearchResults(query))
+    if (this.props.location !== undefined) {
+      console.log(this.props.location)
+      const query = this.props.location.query.q
+      this.props.dispatch(fetchSearchResults(query))
+    }
   }
 
   renderSearchResults(){
