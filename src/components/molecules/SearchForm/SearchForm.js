@@ -1,4 +1,5 @@
-import React, { PropTypes }from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
@@ -10,6 +11,7 @@ import { updateSearchQuery,
 const propTypes = {
   query: PropTypes.string.isRequired,
   autocompleteItems: PropTypes.array.isRequired,
+  horizontal: PropTypes.bool.isRequired,
   // Requires dispatch since this is a stateful component
   //  and will never not have state or dispatch.
   dispatch: PropTypes.func.isRequired
@@ -17,7 +19,8 @@ const propTypes = {
 
 const defaultProps = {
   query: '',
-  autocompleteItems: []
+  autocompleteItems: [],
+  horizontal: false
 };
 
 export class SearchForm extends React.Component {
