@@ -58,7 +58,7 @@ describe('async actions', () => {
     nock(process.env.REACT_APP_MOVEMENTA_API_HOST)
       // Not working due to known issue in nock
       // .matchHeader('X-Api-Key', process.env.REACT_APP_MOVEMENTA_API_KEY)
-      .get(`/v1/entries?q=${encodeURIComponent(query)}`)
+      .get(`/v1/entries?q=foo%20bar%20baz`)
       .reply(200, responseArray)
 
     const expectedActions = [
