@@ -5,8 +5,8 @@ import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
 import { connect } from 'react-redux'
 import { updateSearchQuery,
-         updateAutocompleteItems,
-         fetchSearchResults } from 'actions'
+         fetchSearchResults,
+         fetchQueryPredictions } from 'actions'
 
 const propTypes = {
   query: PropTypes.string.isRequired,
@@ -26,36 +26,16 @@ const defaultProps = {
 export class SearchForm extends React.Component {
   constructor(props) {
     super(props)
-    this.autocompleteCallback = this.autocompleteCallback.bind(this)
     this.handleQueryChange = this.handleQueryChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  componentDidMount() {
-     this.autocompleteService = new window.google.maps.places.AutocompleteService()
   }
 
   handleChange(value) {
     this.props.dispatch(updateSearchQuery(value));
   }
 
-  autocompleteCallback(predictions, status) {
-    const okStatus = window.google.maps.places.PlacesServiceStatus.OK
-    if (status !== okStatus) {
-      this.props.dispatch(updateAutocompleteItems([]))
-      return
-    }
-
-    let predictionsArray = predictions.map((p, idx) => (p.description))
-    this.props.dispatch(updateAutocompleteItems(predictionsArray))
-  }
-
   handleQueryChange(query) {
-    this.props.dispatch(updateSearchQuery(query));
-    //Tells Google to only return geocoding results,
-    // not business names
-    const autoCompleteOptions = { types: ['geocode'] }
-    this.autocompleteService.getPlacePredictions({ ...autoCompleteOptions , input: query }, this.autocompleteCallback)
+    this.props.dispatch(fetchQueryPredictions(query));
   }
 
   renderVertical() {

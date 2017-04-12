@@ -66,8 +66,76 @@ describe('async actions', () => {
       { type: actions.UPDATE_SEARCH_RESULTS, query, results: expectedResults }
     ]
     const store = mockStore()
-
     return store.dispatch(actions.fetchSearchResults(query))
+      .then(() => { // return of async actions
+        expect(store.getActions()).toEqual(expectedActions)
+      })
+  })
+
+  it('creates UPDATE_AUTOCOMPLETE_ITEMS w/predictions when fetching query predictions', () => {
+    const query = '11234'
+    const predictionDescription = '11234 Brooklyn, NY, United States'
+    const autocompleteItems = [predictionDescription]
+
+    const expectedActions = [
+      { type: actions.UPDATE_SEARCH_QUERY, query },
+      { type: actions.UPDATE_AUTOCOMPLETE_ITEMS, autocompleteItems }
+    ]
+
+    // Mock out what I am using from the google API
+    function AutocompleteServiceConstructor(){
+      return {getPlacePredictions: jest.fn((options, callback) => {
+          const status = 'OK'
+          const predictions = [{description: predictionDescription}]
+          callback(predictions, status)
+        })}
+    }
+    window.google = {
+      maps: {
+        places: {
+          AutocompleteService: AutocompleteServiceConstructor,
+          PlacesServiceStatus: {
+            OK: 'OK'
+          }
+        }
+      }
+    }
+    const store = mockStore()
+    return store.dispatch(actions.fetchQueryPredictions(query))
+      .then(() => { // return of async actions
+        expect(store.getActions()).toEqual(expectedActions)
+      })
+  })
+
+  it('creates UPDATE_AUTOCOMPLETE_ITEMS w/no predictions when error in fetching query predictions', () => {
+    const query = '11234'
+    const autocompleteItems = []
+
+    const expectedActions = [
+      { type: actions.UPDATE_SEARCH_QUERY, query },
+      { type: actions.UPDATE_AUTOCOMPLETE_ITEMS, autocompleteItems }
+    ]
+
+    // Mock out what I am using from the google API
+    function AutocompleteServiceConstructor(){
+      return {getPlacePredictions: jest.fn((options, callback) => {
+          const status = 'ZERO_RESULTS'
+          const predictions = "foobar"
+          callback(predictions, status)
+        })}
+    }
+    window.google = {
+      maps: {
+        places: {
+          AutocompleteService: AutocompleteServiceConstructor,
+          PlacesServiceStatus: {
+            OK: 'OK'
+          }
+        }
+      }
+    }
+    const store = mockStore()
+    return store.dispatch(actions.fetchQueryPredictions(query))
       .then(() => { // return of async actions
         expect(store.getActions()).toEqual(expectedActions)
       })
