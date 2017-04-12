@@ -51,22 +51,16 @@ export function fetchQueryPredictions(query) {
     dispatch(updateSearchQuery(query))
     return getPlacePredictions(query)
             .then(predictions => {
-              console.log('got predictions', predictions)
               let predictionsArray = predictions.map((p, idx) => (p.description))
-              console.log("predictionsArray", predictionsArray);
               dispatch(updateAutocompleteItems(predictionsArray))
             })
             .catch(function(status) {
-              console.log('no predictions')
-              console.log("status", status);
-
               dispatch(updateAutocompleteItems([]))
             })
   }
 }
 
 function getPlacePredictions(query) {
-  console.log('getting place predictions')
   // Turn place predictions into an ES6 Promise (easier to understand)
   return new Promise(function(resolve,reject) {
     const autocompleteService = new window.google.maps.places.AutocompleteService()
@@ -74,11 +68,8 @@ function getPlacePredictions(query) {
     const autoCompleteOptions = { types: ['geocode'] } // only return geocoding results, not business names
     const callback = (predictions, status) => {
         if (status !== okStatus) {
-          console.log('rejected')
-
           reject(status)
         } else {
-          console.log('resolved')
           resolve(predictions)
         }
       }
