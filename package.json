@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
-    "enzyme": "^2.8.0",
+    "enzyme": "^2.8.1",
     "eslint": "^3.17.0",
     "jest-enzyme": "^2.1.2",
     "nock": "^9.0.13",
@@ -41,6 +41,7 @@
     "react-addons-test-utils": "^15.5.0",
     "react-scripts": "0.9.5",
     "react-storybook-decorator-background": "^1.0.5",
+    "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.3"
   },
   "scripts": {
