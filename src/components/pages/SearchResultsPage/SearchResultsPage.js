@@ -66,7 +66,7 @@ export class SearchResultsPage extends React.Component {
         <div className="row">
           <div className="col-xs-12 headline-header">
             <div className="box">
-              <HeadlineHeader>Adult Gymnastics near {this.props.query}</HeadlineHeader>
+              <HeadlineHeader>{`Adult Gymnastics near ${this.props.query}`}</HeadlineHeader>
             </div>
           </div>
         </div>
