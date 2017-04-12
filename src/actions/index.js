@@ -11,7 +11,7 @@ export const updateSearchQuery = (query) => ({
   query
 })
 
-export const updateAutocompleteItems = (autocompleteItems, json) => ({
+export const updateAutocompleteItems = (autocompleteItems) => ({
   type: UPDATE_AUTOCOMPLETE_ITEMS,
   autocompleteItems
 })
