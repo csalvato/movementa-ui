@@ -16,11 +16,7 @@ it("renders a logo", function(){
   expect(wrapper.find(Logo)).toBePresent()
 });
 
-xit("renders a search form", function(){
-  // Skipped because I need to restructure how autocompleteService is handled
-  // in the SearchForm component. The instantiation of that object should probably
-  // exist in the actions files, not in the component itself. It existing there
-  // is making mounting the component difficult since window.google is not defined.
+it("renders a search form", function(){
   const wrapper = mount(<Provider store={store}><AppBarHeader /></Provider>);
   expect(wrapper.find(SearchForm)).toBePresent()
 });
