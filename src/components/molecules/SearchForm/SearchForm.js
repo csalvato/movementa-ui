@@ -12,9 +12,8 @@ const propTypes = {
   query: PropTypes.string.isRequired,
   autocompleteItems: PropTypes.array.isRequired,
   horizontal: PropTypes.bool.isRequired,
-  // Requires dispatch since this is a stateful component
-  //  and will never not have state or dispatch.
-  dispatch: PropTypes.func.isRequired
+  // Dispatch passed as a prop by redux  since this is a stateful component.
+  dispatch: PropTypes.func
 };
 
 const defaultProps = {

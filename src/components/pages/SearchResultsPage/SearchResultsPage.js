@@ -11,7 +11,7 @@ const propTypes = {
   isFetchingSearchResults: PropTypes.bool.isRequired,
   // Requires dispatch since this is a stateful component
   //  and will never not have state or dispatch.
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
   query: PropTypes.string
 };
 
