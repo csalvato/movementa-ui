@@ -33,13 +33,11 @@ export function requestSearchResults(query) {
 
 export function fetchSearchResults(query) {
   let headers = new Headers();
-  // TODO: Replace API Key and API domain with env variables.
-  headers.append("X-Api-Key", "FzM9QjNHMjzk4YIBsrYGhQtt");
+  headers.append("X-Api-Key", `${process.env.REACT_APP_MOVEMENTA_API_KEY}`);
   const options = { headers: headers };
-
   return dispatch => {
     dispatch(requestSearchResults(query))
-    return fetch(`http://localhost:5000/v1/entries?q=${encodeURIComponent(query)}`, options)
+    return fetch(`${process.env.REACT_APP_MOVEMENTA_API_HOST}/v1/entries?q=${encodeURIComponent(query)}`, options)
       .then(response => response.json())
       .then(json => {
         json = jsonStyleConverter.snakeToCamelCase(json)

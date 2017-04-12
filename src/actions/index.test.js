@@ -55,8 +55,9 @@ describe('async actions', () => {
     const query = 'foo bar baz'
     const responseArray = [{ "id": 1, "foo_bar": "foo"}, { "id": 2, "foo_bar": "bar"}]
     const expectedResults = [{ "id": 1, "fooBar": "foo"}, { "id": 2, "fooBar": "bar"}]
-    // TODO: Replace API Key and API domain with env variables.
-    nock("http://localhost:5000")
+    nock(process.env.REACT_APP_MOVEMENTA_API_HOST)
+      // Not working due to known issue in nock
+      // .matchHeader('X-Api-Key', process.env.REACT_APP_MOVEMENTA_API_KEY)
       .get(`/v1/entries?q=${encodeURIComponent(query)}`)
       .reply(200, responseArray)
 
