@@ -39,7 +39,7 @@ export function fetchSearchResults(query) {
 
   return dispatch => {
     dispatch(requestSearchResults(query))
-    return fetch(`http://localhost:5000/v1/entries?q=${encodeURIComponent(query)}`)
+    return fetch(`http://localhost:5000/v1/entries?q=${encodeURIComponent(query)}`, options)
       .then(response => response.json())
       .then(json => {
         json = jsonStyleConverter.snakeToCamelCase(json)
