@@ -40,21 +40,21 @@ const results = [{ id: 1,
               ]
 
 it('renders', () => {
-  shallow( <SearchResultsPage/>)
+  shallow( <SearchResultsPage query=""/>)
 })
 
 it('renders circular waiting bar is isFetchingSearchResults prop is set', () => {
-  const wrapper = shallow( <SearchResultsPage isFetchingSearchResults/>)
+  const wrapper = shallow( <SearchResultsPage query="" isFetchingSearchResults/>)
   expect(wrapper).toContainReact(<ProgressBar type='circular' mode='indeterminate' />)
 })
 
 it('renders .no-results when no results and isFetchingSearchResults is false', () => {
-  const wrapper = shallow( <SearchResultsPage />)
+  const wrapper = shallow( <SearchResultsPage query=""/>)
   expect(wrapper.find('.no-results')).toBePresent();
 })
 
 it('renders a list of DirectoryEntry components when results and isFetchingSearchResults is false', () => {
-  const wrapper = shallow( <SearchResultsPage results={results}/>)
+  const wrapper = shallow( <SearchResultsPage query="" results={results}/>)
   expect(wrapper.find(DirectoryEntry)).toHaveLength(2);
 })
 
