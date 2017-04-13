@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
 import { fetchSearchResults } from 'actions'
 
 const propTypes = {
   results: PropTypes.array.isRequired,
   isFetchingSearchResults: PropTypes.bool.isRequired,
-  // Requires dispatch since this is a stateful component
-  //  and will never not have state or dispatch.
+  // Specify dispatch since this is a stateful component
   dispatch: PropTypes.func,
-  query: PropTypes.string
+  query: PropTypes.string.isRequired
 };
 
 const defaultProps = {
@@ -22,9 +22,12 @@ const defaultProps = {
 
 export class SearchResultsPage extends React.Component {
   componentDidMount() {
-    if (this.props.location !== undefined) {
-      const query = this.props.location.query.q
+    const params = new URLSearchParams(this.props.location.search);
+    const query = params.get('q');
+    if (query !== null) {
       this.props.dispatch(fetchSearchResults(query))
+    } else {
+      this.props.dispatch(push('/'))
     }
   }
 
