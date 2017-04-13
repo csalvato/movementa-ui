@@ -1,10 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import { Provider } from 'redux'
 import ConnectedSearchResultsPage,
        { SearchResultsPage } from './SearchResultsPage'
 import { DirectoryEntry, HeadlineHeader } from 'components'
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import { push } from 'react-router-redux'
+import { storeWithEmptyState } from 'configureStore'
+import configureMockStore from 'redux-mock-store'
 
 const results = [{ id: 1,
                   name: "NY Strong",
@@ -60,10 +63,27 @@ it("renders the search query in the headline", function(){
   expect(wrapper).toContainReact(<HeadlineHeader>Adult Gymnastics near foobar</HeadlineHeader>);
 });
 
-xit("redirects to the home page if no query is specified", function(){
+it("redirects to the home page if no URL query is specified", function(){
+  const mockDispatch = jest.fn()
+  const wrapper = mount(<SearchResultsPage
+                          query=""
+                          dispatch={mockDispatch}
+                          location={{search:""}}
+                          />)
+  expect(mockDispatch).toBeCalledWith(push('/'))
+});
 
+it("does not redirect if a URL query is specified, but dispatches a different action (to fetch)", function(){
+  const mockDispatch = jest.fn()
+  const wrapper = mount(<SearchResultsPage
+                          query=""
+                          dispatch={mockDispatch}
+                          location={{search:"?q=foobar"}}/>)
+  expect(mockDispatch).not.toBeCalledWith(push('/'))
+  expect(mockDispatch).toBeCalledWith(expect.any(Function))
 });
 
 xit("gets search results from URL when mounted", function(){
-
+  // No idea how to implement this to make sure it is fetching results
+  // And not calling some other random function.
 });
