@@ -2,13 +2,18 @@ import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from 'reducers'
+import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware } from 'react-router-redux'
 
-export default function configureStore(initialState = {}) {
+export const history = createHistory()
+
+export default function configureStore(initialState = {}, storeHistory = history) {
   const store = createStore(
       rootReducer,
       initialState,
       applyMiddleware(
         thunkMiddleware,
+        routerMiddleware(storeHistory),
         logger
       )
     )
@@ -24,4 +29,4 @@ export default function configureStore(initialState = {}) {
   return store;
 }
 
-export const storeWithEmptyState = configureStore();
+export const storeWithEmptyState = configureStore({}, history);
