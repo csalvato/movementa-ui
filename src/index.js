@@ -12,10 +12,9 @@ import 'airbnb-js-shims';
 import { Provider } from 'react-redux'
 import { storeWithEmptyState, history } from 'configureStore'
 import { ConnectedRouter } from 'react-router-redux'
-import { Route } from 'react-router';
-import { HomePage,
-         SearchResultsPage } from 'components';
+import { Route, Switch } from 'react-router';
 import AppTemplate from './components/templates/AppTemplate/AppTemplate'
+import HomeTemplate from './components/templates/HomeTemplate/HomeTemplate'
 
 // Google Analytics code broke when moving to react-router-redux
 //  Must be reimplemented using Middleware.
@@ -40,12 +39,11 @@ const renderApp = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
-        <div>
-          <Route exact path="/" component={HomePage}/>
-          <Route path="/search" component={AppTemplate}/>
-          <Route path="/search" component={SearchResultsPage}/>
-          {/* <Route path="*" component={NotFoundPage} /> */}
-        </div>
+        <Switch>
+          <Route exact path="/" component={HomeTemplate}/>
+          <Route path="/search" component={AppTemplate} />
+          <Route component={() => <hr/>}/>
+        </Switch>
       </ConnectedRouter>
     </ThemeProvider>
   </Provider>

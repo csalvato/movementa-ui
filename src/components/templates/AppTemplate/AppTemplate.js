@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBarHeader } from 'components'
+import { AppBarHeader, SearchResultsPage } from 'components'
+import { Route } from 'react-router'
 
 const propTypes = {
-  children: PropTypes.element
+  match: PropTypes.object
 };
 
 const defaultProps = {
 };
 
-function AppTemplate({children}) {
+function AppTemplate({match}) {
   return (
     <div className="app">
       <AppBarHeader/>
-      {children}
+      <Route path={`${match.url}`} component={SearchResultsPage}/>
     </div>
   );
 }
