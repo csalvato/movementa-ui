@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
 import { fetchSearchResults } from 'actions'
+import URLSearchParams from 'url-search-params'
 
 const propTypes = {
   results: PropTypes.array.isRequired,
