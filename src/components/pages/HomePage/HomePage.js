@@ -2,10 +2,16 @@ import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
 import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 export function HomePage() {
   return (
     <div className="homepage">
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>{`Movementa Adult Gymnastics Directory`}</title>
+          <meta name="description" content="Find gyms that will allow adults to train gymnastics, tricking, tumbling or parkour." />
+      </Helmet>
       <div className="blurred-background">
         <div className="blurred-background__image"></div>
       </div>
@@ -24,7 +30,7 @@ export function HomePage() {
               <div className="row">
                 <div className="col-xs">
                   <div className="box">
-                    <h1 className="homepage__headline">Learn Gymnastics</h1>
+                    <h1 className="homepage__headline">Train Flips</h1>
                     <h2 className="homepage__subheadline">Find a gym that allows adults to train.</h2>
                   </div>
                 </div>

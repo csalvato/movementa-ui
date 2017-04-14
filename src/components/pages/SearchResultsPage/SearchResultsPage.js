@@ -5,6 +5,7 @@ import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
 import { fetchSearchResults } from 'actions'
+import {Helmet} from "react-helmet";
 
 const propTypes = {
   results: PropTypes.array.isRequired,
@@ -62,6 +63,11 @@ export class SearchResultsPage extends React.Component {
   render() {
     return (
       <div className="search-results-page">
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>{`Adult Gymnastics near ${this.props.query}`}</title>
+            <meta name="description" content={`Find gyms in ${this.props.query} that will allow adults to train gymnastics, tricking, tumbling or parkour.`} />
+        </Helmet>
         <div className="row">
           <div className="col-xs-12 headline-header">
             <div className="box">
