@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
 import { fetchSearchResults } from 'actions'
-import URLSearchParams from 'url-search-params'
 
 const propTypes = {
   results: PropTypes.array.isRequired,
@@ -23,12 +21,9 @@ const defaultProps = {
 
 export class SearchResultsPage extends React.Component {
   componentDidMount() {
-    const params = new URLSearchParams(this.props.location.search);
-    const query = params.get('q');
-    if (query !== null) {
-      this.props.dispatch(fetchSearchResults(query))
-    } else {
-      this.props.dispatch(push('/'))
+    this.props.dispatch(fetchSearchResults(this.props.match.params.query))
+    window.onpopstate = () => {
+      this.props.dispatch(fetchSearchResults(this.props.match.params.query))
     }
   }
 

@@ -29,7 +29,7 @@ export class SearchForm extends React.Component {
   }
 
   performSearch(value){
-    this.props.dispatch(push(`/search?q=${encodeURIComponent(value)}`));
+    this.props.dispatch(push(`/search/${value}`));
     this.props.dispatch(fetchSearchResults(value))
   }
 
