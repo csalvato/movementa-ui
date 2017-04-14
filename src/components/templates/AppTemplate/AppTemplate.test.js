@@ -1,16 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { Provider } from 'redux'
+import { shallow, mount } from 'enzyme'
 import AppTemplate from './AppTemplate'
+import { Route } from 'react-router'
+import { AppBarHeader, SearchResultsPage } from 'components'
 
 it('renders', () => {
-  shallow(<AppTemplate />)
-})
-
-it('renders with children', () => {
-  shallow(<AppTemplate><div>test</div></AppTemplate>)
-})
-
-it('renders with children content', () => {
-  const wrapper = shallow(<AppTemplate><div>foo</div></AppTemplate>)
-  expect(wrapper).toIncludeText("foo")
+  shallow(<AppTemplate match={{url: "/"}}/>)
 })
