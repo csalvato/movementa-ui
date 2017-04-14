@@ -2,10 +2,15 @@ import React from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
 import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 export function HomePage() {
   return (
     <div className="homepage">
+      <Helmet>
+          <meta charSet="utf-8" />
+          <title>{`Movementa Adult Gymnastics Directory`}</title>
+      </Helmet>
       <div className="blurred-background">
         <div className="blurred-background__image"></div>
       </div>
