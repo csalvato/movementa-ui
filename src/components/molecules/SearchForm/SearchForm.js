@@ -4,7 +4,8 @@ import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
 import { connect } from 'react-redux'
-import { fetchSearchResults, fetchQueryPredictions } from 'actions'
+import { fetchSearchResults,
+         fetchQueryPredictions } from 'actions'
 import { push } from 'react-router-redux'
 
 const propTypes = {
@@ -29,8 +30,17 @@ export class SearchForm extends React.Component {
   }
 
   performSearch(value){
-    this.props.dispatch(push(`/search/${value}`));
-    this.props.dispatch(fetchSearchResults(value))
+    var query;
+    if( typeof value === "string" && value.trim() !== ''){
+      query = value
+    } else {
+      query = this.props.query
+    }
+
+    if( this.props.query.trim() !== '' ){
+      this.props.dispatch(push(`/search/${query}`));
+      this.props.dispatch(fetchSearchResults(query))
+    }
   }
 
   handleQueryChange(query) {
