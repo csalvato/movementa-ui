@@ -4,9 +4,8 @@ import Autocomplete from 'react-toolbox/lib/autocomplete/Autocomplete';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Button from 'react-toolbox/lib/button/Button';
 import { connect } from 'react-redux'
-import { updateSearchQuery,
-         fetchSearchResults,
-         fetchQueryPredictions } from 'actions'
+import { fetchSearchResults, fetchQueryPredictions } from 'actions'
+import { push } from 'react-router-redux'
 
 const propTypes = {
   query: PropTypes.string.isRequired,
@@ -26,11 +25,12 @@ export class SearchForm extends React.Component {
   constructor(props) {
     super(props)
     this.handleQueryChange = this.handleQueryChange.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.performSearch = this.performSearch.bind(this)
   }
 
-  handleChange(value) {
-    this.props.dispatch(updateSearchQuery(value));
+  performSearch(value){
+    this.props.dispatch(push(`/search?q=${encodeURIComponent(value)}`));
+    this.props.dispatch(fetchSearchResults(value))
   }
 
   handleQueryChange(query) {
@@ -50,7 +50,7 @@ export class SearchForm extends React.Component {
                hint="Where do you want to train?"
                multiple={false}
                onQueryChange={this.handleQueryChange}
-               onChange={this.handleChange}
+               onChange={this.performSearch}
                source={this.props.autocompleteItems}
                value={this.props.query}
                suggestionMatch={"anywhere"}
@@ -61,7 +61,13 @@ export class SearchForm extends React.Component {
       <div className="row center-xs">
         <div className="col-xs-12">
           <div className="box">
-            <Button raised primary>FIND A GYM</Button>
+            <Button
+              raised
+              primary
+              onClick={this.performSearch}
+            >
+              FIND A GYM
+            </Button>
           </div>
         </div>
       </div>
@@ -82,7 +88,7 @@ export class SearchForm extends React.Component {
                  hint="Search gyms near you"
                  multiple={false}
                  onQueryChange={this.handleQueryChange}
-                 onChange={this.handleChange}
+                 onChange={this.performSearch}
                  source={this.props.autocompleteItems}
                  value={this.props.query}
                  suggestionMatch={"anywhere"}
@@ -94,7 +100,7 @@ export class SearchForm extends React.Component {
               <IconButton
                 inverse
                 icon="search"
-                onClick={() => {this.props.dispatch(fetchSearchResults(this.props.query))}}
+                onClick={this.performSearch}
                 // href={`/search?q=${encodeURIComponent(this.props.query)}`}
               />
             </div>
