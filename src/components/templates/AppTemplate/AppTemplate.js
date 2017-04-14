@@ -4,7 +4,7 @@ import { AppBarHeader, SearchResultsPage } from 'components'
 import { Route } from 'react-router'
 
 const propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object //Fed in from react-router - the path that matches this route
 };
 
 const defaultProps = {
