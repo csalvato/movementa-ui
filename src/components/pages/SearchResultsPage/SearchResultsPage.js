@@ -66,6 +66,7 @@ export class SearchResultsPage extends React.Component {
         <Helmet>
             <meta charSet="utf-8" />
             <title>{`Adult Gymnastics near ${this.props.query}`}</title>
+            <meta name="description" content={`Find gyms in ${this.props.query} that will allow adults to train gymnastics, tricking, tumbling or parkour.`} />
         </Helmet>
         <div className="row">
           <div className="col-xs-12 headline-header">

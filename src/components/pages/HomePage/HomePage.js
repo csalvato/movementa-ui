@@ -10,6 +10,7 @@ export function HomePage() {
       <Helmet>
           <meta charSet="utf-8" />
           <title>{`Movementa Adult Gymnastics Directory`}</title>
+          <meta name="description" content="Find gyms that will allow adults to train gymnastics, tricking, tumbling or parkour." />
       </Helmet>
       <div className="blurred-background">
         <div className="blurred-background__image"></div>
