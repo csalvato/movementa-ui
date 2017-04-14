@@ -30,7 +30,7 @@ export function HomePage() {
               <div className="row">
                 <div className="col-xs">
                   <div className="box">
-                    <h1 className="homepage__headline">Learn Gymnastics</h1>
+                    <h1 className="homepage__headline">Train Flips</h1>
                     <h2 className="homepage__subheadline">Find a gym that allows adults to train.</h2>
                   </div>
                 </div>
