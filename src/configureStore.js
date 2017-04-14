@@ -3,8 +3,7 @@ import logger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from 'reducers'
 import createHistory from 'history/createBrowserHistory'
-import { routerMiddleware } from 'react-router-redux'
-import { LOCATION_CHANGE } from 'react-router-redux'
+import { LOCATION_CHANGE, routerMiddleware } from 'react-router-redux'
 
 export const history = createHistory()
 
