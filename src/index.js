@@ -27,7 +27,7 @@ const renderApp = () => (
         <Switch>
           <Route exact path="/" component={HomeTemplate}/>
           <Route path="/search" component={AppTemplate} />
-          <Route component={() => <hr/>}/>
+          <Route component={() => <div>DOH! 404</div>}/>
         </Switch>
       </ConnectedRouter>
     </ThemeProvider>
