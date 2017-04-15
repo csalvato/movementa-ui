@@ -9,6 +9,10 @@ const propTypes = {
   pageTitle: PropTypes.string.isRequired
 };
 
+const defaultProps = {
+  pageTitle: "Movementa Gym Directory - Page Not Found"
+};
+
 export class NotFoundPage extends React.Component {
   componentDidMount() {
     this.props.dispatch(updatePageTitle(`Movementa Gym Directory - Page Not Found`))
@@ -51,5 +55,6 @@ const mapStateToProps = (state) => {
 }
 
 NotFoundPage.propTypes = propTypes;
+NotFoundPage.defaultProps = defaultProps;
 
 export default connect(mapStateToProps)(NotFoundPage);

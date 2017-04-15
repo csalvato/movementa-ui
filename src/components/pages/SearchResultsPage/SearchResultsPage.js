@@ -18,7 +18,8 @@ const propTypes = {
 
 const defaultProps = {
   results: [],
-  isFetchingSearchResults: false
+  isFetchingSearchResults: false,
+  pageTitle: "Movementa Gym Directory"
 };
 
 export class SearchResultsPage extends React.Component {
