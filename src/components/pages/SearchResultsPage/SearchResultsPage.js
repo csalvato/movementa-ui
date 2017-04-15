@@ -12,6 +12,7 @@ const propTypes = {
   isFetchingSearchResults: PropTypes.bool.isRequired,
   // Specify dispatch since this is a stateful component
   dispatch: PropTypes.func,
+  pageTitle: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired
 };
 
@@ -65,7 +66,7 @@ export class SearchResultsPage extends React.Component {
       <div className="search-results-page">
         <Helmet>
             <meta charSet="utf-8" />
-            <title>{`Adult Gymnastics near ${this.props.query}`}</title>
+            <title>{this.props.pageTitle}</title>
             <meta name="description" content={`Find gyms in ${this.props.query} that will allow adults to train gymnastics, tricking, tumbling or parkour.`} />
         </Helmet>
         <div className="row">
@@ -93,7 +94,8 @@ const mapStateToProps = (state) => {
   return {
     isFetchingSearchResults: state.searchResults.isFetching,
     results: state.searchResults.results,
-    query: state.query
+    query: state.query,
+    pageTitle: state.pageTitle
   }
 }
 

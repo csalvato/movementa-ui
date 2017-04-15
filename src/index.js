@@ -26,8 +26,7 @@ const renderApp = () => (
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" component={HomeTemplate}/>
-          <Route path="/search" component={AppTemplate} />
-          <Route component={() => <div>DOH! 404</div>}/>
+          <Route component={AppTemplate}/>
         </Switch>
       </ConnectedRouter>
     </ThemeProvider>
