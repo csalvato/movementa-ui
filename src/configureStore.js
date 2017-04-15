@@ -26,13 +26,7 @@ function logPageView(pageTitle = 'Unknown Page Title') {
 }
 
 const googleAnalytics = store => next => action => {
-  console.log("action", action);
-  console.log("action.type == UPDATE_PAGE_TITLE", action.type == UPDATE_PAGE_TITLE);
-  console.log("UPDATE_PAGE_TITLE", UPDATE_PAGE_TITLE);
-
-
-  if(action.type == UPDATE_PAGE_TITLE) {
-    console.log("Registering Page View")
+  if(action.type === UPDATE_PAGE_TITLE) {
     logPageView(action.pageTitle)
   }
   return next(action)
