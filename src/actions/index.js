@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import jsonStyleConverter from 'json-style-converter'
+import jsonStyleConverter from 'json-style-converter/es5'
 
 export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY'
 export const UPDATE_AUTOCOMPLETE_ITEMS = 'UPDATE_AUTOCOMPLETE_ITEMS'
