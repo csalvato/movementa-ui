@@ -48,7 +48,6 @@ export function fetchSearchResults(query) {
       .then(json => {
         json = jsonStyleConverter.snakeToCamelCase(json)
         dispatch(updateSearchResults(query, json))
-        dispatch(updatePageTitle(`Adult Gymnastics near ${query}`))
       })
   }
 }

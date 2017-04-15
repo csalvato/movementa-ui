@@ -4,7 +4,7 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
-import { fetchSearchResults } from 'actions'
+import { fetchSearchResults, updatePageTitle } from 'actions'
 import {Helmet} from "react-helmet";
 
 const propTypes = {
@@ -27,6 +27,17 @@ export class SearchResultsPage extends React.Component {
     this.props.dispatch(fetchSearchResults(this.props.match.params.query))
     window.onpopstate = () => {
       this.props.dispatch(fetchSearchResults(this.props.match.params.query))
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("nextProps.results", nextProps.results);
+    console.log("this.props.results", this.props.results);
+
+    if(nextProps.results !== this.props.results && this.props.results.length != 0){
+      console.log("updating Page title");
+
+      this.props.dispatch(updatePageTitle(`Adult Gymnastics near ${this.props.query}`))
     }
   }
 
