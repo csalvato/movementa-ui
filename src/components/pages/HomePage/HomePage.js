@@ -3,13 +3,16 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import { Logo, SearchForm } from 'components';
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { updatePageTitle } from 'actions'
 
-export function HomePage() {
+export function HomePage({dispatch}) {
+  const pageTitle = `Movementa Adult Gymnastics Directory`
+  dispatch(updatePageTitle(pageTitle))
   return (
     <div className="homepage">
       <Helmet>
           <meta charSet="utf-8" />
-          <title>{`Movementa Adult Gymnastics Directory`}</title>
+          <title>{pageTitle}</title>
           <meta name="description" content="Find gyms that will allow adults to train gymnastics, tricking, tumbling or parkour." />
       </Helmet>
       <div className="blurred-background">
