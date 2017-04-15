@@ -6,17 +6,19 @@ import { connect } from 'react-redux'
 import { updatePageTitle } from 'actions'
 
 const propTypes = {
+  // Specify dispatch since this is a stateful component
+  dispatch: PropTypes.func,
   pageTitle: PropTypes.string.isRequired
 };
 
 const defaultProps = {
-  pageTitle: "Movementa Gym Directory - Page Not Found"
 };
 
 export class NotFoundPage extends React.Component {
   componentDidMount() {
-    this.props.dispatch(updatePageTitle(`Movementa Gym Directory - Page Not Found`))
+    this.props.dispatch(updatePageTitle('Page Not Found - Movementa'))
   }
+
   render() {
     return (
       <div className="homepage">
@@ -54,7 +56,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-NotFoundPage.propTypes = propTypes;
-NotFoundPage.defaultProps = defaultProps;
+NotFoundPage.propTypes = propTypes
+NotFoundPage.defaultProps = defaultProps
 
 export default connect(mapStateToProps)(NotFoundPage);
