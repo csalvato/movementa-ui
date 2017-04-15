@@ -44,6 +44,15 @@ describe('actions', () => {
     }
     expect(actions.requestSearchResults(query)).toEqual(expectedAction)
   })
+
+  it('should create an action to update the page title', () => {
+    const pageTitle = 'foobar'
+    const expectedAction = {
+      type: actions.UPDATE_PAGE_TITLE,
+      pageTitle
+    }
+    expect(actions.updatePageTitle(pageTitle)).toEqual(expectedAction)
+  })
 })
 
 describe('async actions', () => {
@@ -55,7 +64,6 @@ describe('async actions', () => {
     const query = 'foo bar baz'
     const responseArray = [{ "id": 1, "foo_bar": "foo"}, { "id": 2, "foo_bar": "bar"}]
     const expectedResults = [{ "id": 1, "fooBar": "foo"}, { "id": 2, "fooBar": "bar"}]
-    const expectedPageTitle = 'Adult Gymnastics near foo bar baz'
     nock(process.env.REACT_APP_MOVEMENTA_API_HOST)
       // Not working due to known issue in nock
       // .matchHeader('X-Api-Key', process.env.REACT_APP_MOVEMENTA_API_KEY)
@@ -64,8 +72,7 @@ describe('async actions', () => {
 
     const expectedActions = [
       { type: actions.REQUEST_SEARCH_RESULTS, query },
-      { type: actions.UPDATE_SEARCH_RESULTS, query, results: expectedResults },
-      { type: actions.UPDATE_PAGE_TITLE, pageTitle: expectedPageTitle }
+      { type: actions.UPDATE_SEARCH_RESULTS, query, results: expectedResults }
     ]
     const store = mockStore()
     return store.dispatch(actions.fetchSearchResults(query))
