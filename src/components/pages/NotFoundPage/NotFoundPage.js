@@ -21,7 +21,7 @@ export class NotFoundPage extends React.Component {
 
   render() {
     return (
-      <div className="homepage">
+      <div className="not-found-page">
         <Helmet>
             <meta charSet="utf-8" />
             <title>{this.props.pageTitle}</title>
