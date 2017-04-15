@@ -44,6 +44,15 @@ describe('actions', () => {
     }
     expect(actions.requestSearchResults(query)).toEqual(expectedAction)
   })
+
+  it('should create an action to update the page title', () => {
+    const pageTitle = 'foobar'
+    const expectedAction = {
+      type: actions.UPDATE_PAGE_TITLE,
+      pageTitle
+    }
+    expect(actions.updatePageTitle(pageTitle)).toEqual(expectedAction)
+  })
 })
 
 describe('async actions', () => {

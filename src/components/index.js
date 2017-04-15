@@ -6,6 +6,7 @@ import SearchForm from './molecules/SearchForm/SearchForm'
 import DirectoryEntry from './organisms/DirectoryEntry/DirectoryEntry'
 import HomePage from './pages/HomePage/HomePage'
 import SearchResultsPage from './pages/SearchResultsPage/SearchResultsPage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import AppTemplate from './templates/AppTemplate/AppTemplate'
 import HomeTemplate from './templates/HomeTemplate/HomeTemplate'
 
@@ -17,6 +18,7 @@ export { FeatureIcon,
          DirectoryEntry,
          HomePage,
          SearchResultsPage,
+         NotFoundPage,
          AppTemplate,
          HomeTemplate
        }

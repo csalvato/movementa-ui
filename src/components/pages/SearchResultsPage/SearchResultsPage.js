@@ -4,7 +4,7 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
 import { connect } from 'react-redux'
 import { DirectoryEntry, HeadlineHeader } from 'components';
-import { fetchSearchResults } from 'actions'
+import { fetchSearchResults, updatePageTitle } from 'actions'
 import {Helmet} from "react-helmet";
 
 const propTypes = {
@@ -12,12 +12,14 @@ const propTypes = {
   isFetchingSearchResults: PropTypes.bool.isRequired,
   // Specify dispatch since this is a stateful component
   dispatch: PropTypes.func,
+  pageTitle: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired
 };
 
 const defaultProps = {
   results: [],
-  isFetchingSearchResults: false
+  isFetchingSearchResults: false,
+  pageTitle: "Movementa Gym Directory"
 };
 
 export class SearchResultsPage extends React.Component {
@@ -25,6 +27,12 @@ export class SearchResultsPage extends React.Component {
     this.props.dispatch(fetchSearchResults(this.props.match.params.query))
     window.onpopstate = () => {
       this.props.dispatch(fetchSearchResults(this.props.match.params.query))
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if(nextProps.results !== this.props.results && this.props.results.length != 0){
+      this.props.dispatch(updatePageTitle(`Adult Gymnastics near ${this.props.query}`))
     }
   }
 
@@ -65,7 +73,7 @@ export class SearchResultsPage extends React.Component {
       <div className="search-results-page">
         <Helmet>
             <meta charSet="utf-8" />
-            <title>{`Adult Gymnastics near ${this.props.query}`}</title>
+            <title>{this.props.pageTitle}</title>
             <meta name="description" content={`Find gyms in ${this.props.query} that will allow adults to train gymnastics, tricking, tumbling or parkour.`} />
         </Helmet>
         <div className="row">
@@ -93,7 +101,8 @@ const mapStateToProps = (state) => {
   return {
     isFetchingSearchResults: state.searchResults.isFetching,
     results: state.searchResults.results,
-    query: state.query
+    query: state.query,
+    pageTitle: state.pageTitle
   }
 }
 

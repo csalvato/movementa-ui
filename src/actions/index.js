@@ -1,10 +1,16 @@
 import fetch from 'isomorphic-fetch'
-import jsonStyleConverter from 'json-style-converter'
+import jsonStyleConverter from 'json-style-converter/es5'
 
 export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY'
 export const UPDATE_AUTOCOMPLETE_ITEMS = 'UPDATE_AUTOCOMPLETE_ITEMS'
 export const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS'
 export const REQUEST_SEARCH_RESULTS = 'REQUEST_SEARCH_RESULTS'
+export const UPDATE_PAGE_TITLE = 'UPDATE_PAGE_TITLE'
+
+export const updatePageTitle = (pageTitle) => ({
+  type: UPDATE_PAGE_TITLE,
+  pageTitle
+})
 
 export const updateSearchQuery = (query) => ({
   type: UPDATE_SEARCH_QUERY,

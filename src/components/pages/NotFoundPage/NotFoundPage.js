@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import Layout from 'react-toolbox/lib/layout/Layout';
-import { Logo, SearchForm } from 'components';
-import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { connect } from 'react-redux'
 import { updatePageTitle } from 'actions'
 
 const propTypes = {
@@ -15,30 +14,20 @@ const propTypes = {
 const defaultProps = {
 };
 
-export class HomePage extends React.Component {
+export class NotFoundPage extends React.Component {
   componentDidMount() {
-    this.props.dispatch(updatePageTitle('Movementa Adult Gymnastics Directory'))
+    this.props.dispatch(updatePageTitle('Page Not Found - Movementa'))
   }
 
   render() {
     return (
-      <div className="homepage">
+      <div className="not-found-page">
         <Helmet>
             <meta charSet="utf-8" />
             <title>{this.props.pageTitle}</title>
-            <meta name="description" content="Find gyms that will allow adults to train gymnastics, tricking, tumbling or parkour." />
+            <meta name="description" content="Oops! The page you're looking for was not found." />
         </Helmet>
-        <div className="blurred-background">
-          <div className="blurred-background__image"></div>
-        </div>
         <Layout>
-          <div className="logo-header row center-xs">
-            <div className="col-xs-12">
-              <header className="box">
-                <Logo withText/>
-              </header>
-            </div>
-          </div>
           <div className="row">
             <div className="col-xs-offset-1
                             col-xs-10">
@@ -46,12 +35,12 @@ export class HomePage extends React.Component {
                 <div className="row">
                   <div className="col-xs">
                     <div className="box">
-                      <h1 className="homepage__headline">Train Flips</h1>
-                      <h2 className="homepage__subheadline">Find a gym that allows adults to train.</h2>
+                      <h1 className="homepage__headline">404 Error!</h1>
+                      <h2 className="homepage__subheadline">That flippin' page can't be found.</h2>
+                      <h2 className="homepage__subheadline">Use the search bar above to find gyms near you.</h2>
                     </div>
                   </div>
                 </div>
-                <SearchForm/>
               </section>
             </div>
           </div>
@@ -61,7 +50,13 @@ export class HomePage extends React.Component {
   }
 }
 
-HomePage.propTypes = propTypes
-HomePage.defaultProps = defaultProps
+const mapStateToProps = (state) => {
+  return {
+    pageTitle: state.pageTitle
+  }
+}
 
-export default connect()(HomePage);
+NotFoundPage.propTypes = propTypes
+NotFoundPage.defaultProps = defaultProps
+
+export default connect(mapStateToProps)(NotFoundPage);
