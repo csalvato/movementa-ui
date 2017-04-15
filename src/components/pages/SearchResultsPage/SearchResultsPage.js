@@ -31,12 +31,7 @@ export class SearchResultsPage extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log("nextProps.results", nextProps.results);
-    console.log("this.props.results", this.props.results);
-
     if(nextProps.results !== this.props.results && this.props.results.length != 0){
-      console.log("updating Page title");
-
       this.props.dispatch(updatePageTitle(`Adult Gymnastics near ${this.props.query}`))
     }
   }
